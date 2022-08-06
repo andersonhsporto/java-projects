@@ -1,6 +1,8 @@
 package com.api.jparelationships.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class SpeciesEntity {
@@ -8,6 +10,14 @@ public class SpeciesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @ManyToMany
+    @JoinTable(
+            name = "regions_species",
+            joinColumns = @JoinColumn(name = "species_id"),
+            inverseJoinColumns = @JoinColumn(name = "region_id")
+    )
+    Set<RegionEntity> regions = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "family_id", referencedColumnName = "id")

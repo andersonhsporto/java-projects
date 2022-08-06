@@ -1,7 +1,11 @@
 package com.api.jparelationships.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class RegionEntity {
@@ -9,6 +13,10 @@ public class RegionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "regions")
+    private Set<SpeciesEntity> species = new HashSet<>();
 
     private String name;
 

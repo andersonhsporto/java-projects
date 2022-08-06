@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -16,6 +17,10 @@ public class FamilyController {
     @Autowired
     FamilyRepository familyRepository;
 
+    @GetMapping
+    List<FamilyEntity> getAllFamilies() {
+        return familyRepository.findAll();
+    }
     @PostMapping
     public ResponseEntity createFamily(@RequestBody Map<String, Object> requestMap) {
         FamilyEntity family = new FamilyEntity();
