@@ -1,9 +1,6 @@
 package com.api.jparelationships.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SpeciesEntity {
@@ -12,8 +9,39 @@ public class SpeciesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "family_id", referencedColumnName = "id")
+    private FamilyEntity family;
+
     private String name;
 
     private String genus;
 
+    public Long getId() {
+        return id;
+    }
+
+    public FamilyEntity getFamily() {
+        return family;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGenus() {
+        return genus;
+    }
+
+    public void setFamily(FamilyEntity family) {
+        this.family = family;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGenus(String genus) {
+        this.genus = genus;
+    }
 }
