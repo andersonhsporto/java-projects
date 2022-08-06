@@ -20,7 +20,7 @@ public class FamilyEntity {
 
     private String order;
 
-    private String taxonomy_class;
+    private String taxonomyClass;
 
     private String phylum;
 
@@ -44,8 +44,8 @@ public class FamilyEntity {
         return order;
     }
 
-    public String getTaxonomy_class() {
-        return taxonomy_class;
+    public String getTaxonomyClass() {
+        return taxonomyClass;
     }
 
     public String getPhylum() {
@@ -68,8 +68,8 @@ public class FamilyEntity {
         this.order = order;
     }
 
-    public void setTaxonomy_class(String taxonomy_class) {
-        this.taxonomy_class = taxonomy_class;
+    public void setTaxonomyClass(String taxonomy_class) {
+        this.taxonomyClass = taxonomy_class;
     }
 
     public void setPhylum(String phylum) {

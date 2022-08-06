@@ -25,20 +25,20 @@ public class SpeciesEntity {
         return family;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getGenus() {
-        return genus;
-    }
-
     public void setFamily(FamilyEntity family) {
         this.family = family;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGenus() {
+        return genus;
     }
 
     public void setGenus(String genus) {
