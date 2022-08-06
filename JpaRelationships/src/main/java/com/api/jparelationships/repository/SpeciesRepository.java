@@ -1,8 +1,8 @@
 package com.api.jparelationships.repository;
 
-import com.api.jparelationships.entities.RegionEntity;
+import com.api.jparelationships.entities.SpeciesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RegionRepository extends JpaRepository<RegionEntity, Long> {}
+public class SpeciesRepository extends JpaRepository<SpeciesEntity, Long> {}

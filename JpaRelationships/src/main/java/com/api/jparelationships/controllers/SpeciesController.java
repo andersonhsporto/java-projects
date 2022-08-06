@@ -1,4 +1,4 @@
 package com.api.jparelationships.controllers;
 
-public class GenusController {
+public class SpeciesController {
 }
