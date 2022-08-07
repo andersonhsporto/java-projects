@@ -20,26 +20,22 @@ public class FamilyEntity {
 
     private String phylum;
 
-    private String kingdom;
-
-    private String domain;
-
     @JsonIgnore
     @OneToMany(mappedBy = "family")
     private Set<SpeciesEntity> species;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domain_id", referencedColumnName = "id")
+    private DomainEntity domain;
+
     public FamilyEntity(String name,
                         String order,
                         String taxonomyClass,
-                        String phylum,
-                        String kingdom,
-                        String domain) {
+                        String phylum) {
         this.name = name;
         this.order = order;
         this.taxonomyClass = taxonomyClass;
         this.phylum = phylum;
-        this.kingdom = kingdom;
-        this.domain = domain;
     }
 
     public FamilyEntity() {
@@ -70,14 +66,6 @@ public class FamilyEntity {
         return phylum;
     }
 
-    public String getKingdom() {
-        return kingdom;
-    }
-
-    public String getDomain() {
-        return domain;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -94,11 +82,11 @@ public class FamilyEntity {
         this.phylum = phylum;
     }
 
-    public void setKingdom(String kingdom) {
-        this.kingdom = kingdom;
+    public DomainEntity getDomain() {
+        return domain;
     }
 
-    public void setDomain(String domain) {
+    public void setDomain(DomainEntity domain) {
         this.domain = domain;
     }
 }
