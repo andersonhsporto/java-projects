@@ -1,6 +1,5 @@
 package com.api.jparelationships.controllers;
 
-import com.api.jparelationships.entities.FamilyEntity;
 import com.api.jparelationships.entities.RegionEntity;
 import com.api.jparelationships.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -42,6 +42,10 @@ public class FamilyEntity {
         this.domain = domain;
     }
 
+    public FamilyEntity() {
+
+    }
+
     public Long getId() {
         return id;
     }

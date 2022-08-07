@@ -19,8 +19,7 @@ public class SpeciesEntity {
     @JoinTable(
             name = "regions_species",
             joinColumns = @JoinColumn(name = "species_id"),
-            inverseJoinColumns = @JoinColumn(name = "region_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "region_id"))
     public Set<RegionEntity> regions = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
