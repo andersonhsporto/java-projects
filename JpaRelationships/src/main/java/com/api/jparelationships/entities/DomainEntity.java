@@ -17,7 +17,7 @@ public class DomainEntity {
     private String kingdom;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "domain")
+    @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL)
     private Set<FamilyEntity> families;
 
 

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +32,10 @@ public class DomainController {
         return ResponseEntity.status(HttpStatus.OK).body("Domain created successfully");
     }
 
+    @DeleteMapping
+    public ResponseEntity deleteDomain(@RequestBody Map<String, Object> requestMap) {
+        Long domainId = Long.parseLong((String) requestMap.get("domain_id"));
+        domainRepository.deleteById(domainId);
+        return ResponseEntity.status(HttpStatus.OK).body("Domain deleted successfully");
+    }
 }
