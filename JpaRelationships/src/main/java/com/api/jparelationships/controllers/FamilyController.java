@@ -26,13 +26,13 @@ public class FamilyController {
     }
     @PostMapping
     public ResponseEntity createFamily(@RequestBody Map<String, Object> requestMap) {
-        FamilyEntity family = new FamilyEntity();
-        family.setName((String) requestMap.get("name"));
-        family.setOrder((String) requestMap.get("order"));
-        family.setTaxonomyClass((String) requestMap.get("taxonomy_class"));
-        family.setPhylum((String) requestMap.get("phylum"));
-        family.setKingdom((String) requestMap.get("kingdom"));
-        family.setDomain((String) requestMap.get("domain"));
+        FamilyEntity family = new FamilyEntity(
+                (String) requestMap.get("name"),
+                (String) requestMap.get("order"),
+                (String) requestMap.get("taxonomy_class"),
+                (String) requestMap.get("phylum"),
+                (String) requestMap.get("kingdom"),
+                (String) requestMap.get("domain"));
         familyRepository.save(family);
         return ResponseEntity.status(HttpStatus.OK).body("Family created successfully");
     }

@@ -21,7 +21,7 @@ public class RegionEntity {
     private String geographicalRegion;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "regions")
+    @ManyToMany(mappedBy = "regions") //variavel que mapeia a relação de familias com regiões
     private Set<SpeciesEntity> species = new HashSet<>();
 
     public Long getId() {

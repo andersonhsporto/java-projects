@@ -28,6 +28,20 @@ public class FamilyEntity {
     @OneToMany(mappedBy = "family")
     private Set<SpeciesEntity> species;
 
+    public FamilyEntity(String name,
+                        String order,
+                        String taxonomyClass,
+                        String phylum,
+                        String kingdom,
+                        String domain) {
+        this.name = name;
+        this.order = order;
+        this.taxonomyClass = taxonomyClass;
+        this.phylum = phylum;
+        this.kingdom = kingdom;
+        this.domain = domain;
+    }
+
     public Long getId() {
         return id;
     }

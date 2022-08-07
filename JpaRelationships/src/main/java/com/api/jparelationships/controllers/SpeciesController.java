@@ -51,7 +51,7 @@ public class SpeciesController {
         return speciesRepository.save(species);
     }
 
-    @PutMapping("/associated/family-species")
+    @PutMapping("/associated/species-family")
     public SpeciesEntity associateFamilyRegion(@RequestBody Map<String, Object> requestMap) {
         Long speciesId = Long.parseLong((String) requestMap.get("species_id"));
         Long familyId = Long.parseLong((String) requestMap.get("family_id"));
@@ -60,6 +60,4 @@ public class SpeciesController {
         species.setFamily(family);
         return speciesRepository.save(species);
     }
-
-
 }
