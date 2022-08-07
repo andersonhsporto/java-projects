@@ -6,7 +6,7 @@ A simple CRUD example with Spring Data JPA using multiple associations
 ![Schema](https://github.com/andersonhsporto/JpaRelationships/blob/master/IMG/DB.png)
 
 
-## Métodos
+## Methods
 Requests to the API must follow the standards:
 | Method | Description |
 |---|---|
