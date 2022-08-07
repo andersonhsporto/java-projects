@@ -14,15 +14,15 @@ public class RegionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "regions")
-    private Set<SpeciesEntity> species = new HashSet<>();
-
     private String name;
 
     private String country;
 
     private String geographicalRegion;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "regions")
+    private Set<SpeciesEntity> species = new HashSet<>();
 
     public Long getId() {
         return id;

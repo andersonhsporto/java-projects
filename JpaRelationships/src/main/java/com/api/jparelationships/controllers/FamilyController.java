@@ -1,7 +1,10 @@
 package com.api.jparelationships.controllers;
 
 import com.api.jparelationships.entities.FamilyEntity;
+import com.api.jparelationships.entities.RegionEntity;
+import com.api.jparelationships.entities.SpeciesEntity;
 import com.api.jparelationships.repository.FamilyRepository;
+import com.api.jparelationships.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,4 +36,5 @@ public class FamilyController {
         familyRepository.save(family);
         return ResponseEntity.status(HttpStatus.OK).body("Family created successfully");
     }
+
 }

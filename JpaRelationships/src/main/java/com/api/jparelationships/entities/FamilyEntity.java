@@ -12,10 +12,6 @@ public class FamilyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "family")
-    private Set<SpeciesEntity> students;
-
     private String name;
 
     private String order;
@@ -28,12 +24,16 @@ public class FamilyEntity {
 
     private String domain;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "family")
+    private Set<SpeciesEntity> species;
+
     public Long getId() {
         return id;
     }
 
-    public Set<SpeciesEntity> getStudents() {
-        return students;
+    public Set<SpeciesEntity> getSpecies() {
+        return species;
     }
 
     public String getName() {

@@ -11,21 +11,21 @@ public class SpeciesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    private String name;
+
+    private String genus;
+
     @ManyToMany
     @JoinTable(
             name = "regions_species",
             joinColumns = @JoinColumn(name = "species_id"),
             inverseJoinColumns = @JoinColumn(name = "region_id")
     )
-    Set<RegionEntity> regions = new HashSet<>();
+    public Set<RegionEntity> regions = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "family_id", referencedColumnName = "id")
     private FamilyEntity family;
-
-    private String name;
-
-    private String genus;
 
     public Long getId() {
         return id;
