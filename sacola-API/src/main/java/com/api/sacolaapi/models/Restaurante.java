@@ -36,5 +36,4 @@ public class Restaurante implements Serializable {
   @Embedded
   private Endereco endereco;
 
-
 }
