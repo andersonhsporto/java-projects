@@ -1,15 +1,13 @@
 package com.api.sacolaapi.models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,23 +15,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Data
 @Builder
+@Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NoArgsConstructor
-public class Restaurante implements Serializable {
+public class Restaurante {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-
-  private String nomeRestaurante;
-
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-  @JoinColumn(name = "restaurante_id")
-  private List<Produto> catalogoProdutos;
-
+  private String nome;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Produto> cardapio;
   @Embedded
   private Endereco endereco;
-
 }

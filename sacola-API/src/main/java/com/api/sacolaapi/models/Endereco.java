@@ -13,12 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Endereco {
 
-  private String rua;
-
-  private String cidade;
-
   private String cep;
-
   private String complemento;
-
 }

@@ -1,30 +1,33 @@
 package com.api.sacolaapi.models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Data
 @Builder
+@Data
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @NoArgsConstructor
-public class Produto implements Serializable {
+public class Produto {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
-
-  private String nomeProduto;
-
-  private boolean disponivel;
-
+  private String nome;
   private double valorUnitario;
-
+  @Builder.Default
+  private Boolean disponivel = true;
+  @ManyToOne
+  @JsonIgnore
+  private Restaurante restaurante;
 }

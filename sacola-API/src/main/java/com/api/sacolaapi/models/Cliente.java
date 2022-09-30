@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 public class Cliente {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
