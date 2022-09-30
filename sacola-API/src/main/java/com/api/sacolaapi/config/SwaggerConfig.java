@@ -18,8 +18,7 @@ public class SwaggerConfig {
     return new Docket(DocumentationType.SWAGGER_2)
         .useDefaultResponseMessages(false)
         .select()
-        .apis(RequestHandlerSelectors.any())
-        .paths(PathSelectors.any())
+        .apis(RequestHandlerSelectors.basePackage("com.api.sacolaapi.controllers"))
         .build()
         .apiInfo(apiInfo());
   }
