@@ -27,7 +27,7 @@ public class SwaggerConfig {
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
         .title("Sacola API")
-        .description("API desenvolvida para o desafio da ifood")
+        .description("API desenvolvida durante o ifood dev week")
         .version("v1")
         .contact(contact())
         .build();
