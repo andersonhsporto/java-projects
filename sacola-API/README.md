@@ -25,8 +25,8 @@
 	<td>2.**</td>
 </tr>
 <tr>
-	<td>Gradle</td>
-	<td>7.**</td>
+	<td>Maven</td>
+	<td>3.8.6</td>
 </tr>
 <tr>
 	<td>Postman</td>
