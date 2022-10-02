@@ -94,4 +94,28 @@ public class SacolaServiceImplementation implements SacolaService {
     sacola.setFechada(true);
     return sacolaRepository.save(sacola);
   }
+
+  @Override
+  public ResponseEntity<?> deleteSacola(Long id) {
+    var sacola = sacolaRepository.findById(id);
+
+    if (sacola.isEmpty()) {
+      return new ResponseEntity<>("Esta sacola não existe", HttpStatus.CONFLICT);
+    }
+    sacolaRepository.delete(sacola.get());
+    return new ResponseEntity<>("Sacola excluída com sucesso!", HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<?> alterarItemNaSacola(Long id, ItemDto itemDto) {
+    var sacola = verSacola(itemDto.getSacolaId());
+    var itemParaSerAlterado = sacola.getItens().stream()
+        .filter(item -> item.getId().equals(id))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException("Esse item não existe!"));
+
+    itemParaSerAlterado.setQuantidade(itemDto.getQuantidade());
+    sacolaRepository.save(sacola);
+    return new ResponseEntity<>(itemParaSerAlterado, HttpStatus.OK);
+  }
 }

@@ -11,4 +11,8 @@ public interface SacolaService {
   Sacola verSacola(Long id);
 
   Sacola fecharSacola(Long id, int formaPagamento);
+
+  ResponseEntity<?> deleteSacola(Long id);
+
+  ResponseEntity<?> alterarItemNaSacola(Long id, ItemDto itemDto);
 }
