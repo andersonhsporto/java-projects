@@ -1,4 +1,4 @@
-<h1>Sacola API para Servir uma Aplicação com Domínio de Delivery</h1>
+<h1>Sacola API</h1>
 
 
 <h3>Features</h3>
