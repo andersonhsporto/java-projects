@@ -37,7 +37,7 @@
 
 No Terminal/Console:
 <ol>
-	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/cami-la/sacola-api.git</code></li>
+	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/andersonhsporto/sacola-API.git</code></li>
 	<li>Entre na pasta raiz do projeto: <code>cd sacola-API</code></li> 
 	<li>Utilize o comando: <code>./mvn package</code></li>
 </ol>
