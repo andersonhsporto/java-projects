@@ -75,6 +75,8 @@ No Terminal/Console:
 </tr>
 </table>
 
+Inspirado no projeto [api_IFOOD_DEV_WEEK](https://github.com/cami-la/sacola-api_IFOOD_DEV_WEEK).
+
 <p align=left> <b>Minhas informações de contato 📬</b></p>
 <p align=left>
 <a href="https://github.com/andersonhsporto" target="_blank"><img src="https://img.shields.io/badge/Github-181717?logo=Github&logoColor=white"/></a>  
