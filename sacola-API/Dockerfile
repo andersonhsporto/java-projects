@@ -7,6 +7,6 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:18-jdk
 RUN mkdir /app
-COPY --from=build /project/target/taygeta-1-SNAPSHOT.jar /app/taygeta-1-SNAPSHOT.jar
+COPY --from=build /project/target/sacola-API-0.0.1-SNAPSHOT.jar /app/sacola-API-0.0.1-SNAPSHOT.jar
 WORKDIR /app
 CMD "java" "-jar" "sacola-API-0.0.1-SNAPSHOT.jar"
