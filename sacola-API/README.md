@@ -71,13 +71,16 @@ Para iniciar a api em ambiente docker utilize o comando abaixo na raiz do reposi
 	<td>2.1.214</td>
 </tr>
 </table>
-
 </br>
-</br>
-Inspirado no projeto [Api Ifood Dev Week](https://github.com/cami-la/sacola-api_IFOOD_DEV_WEEK).
 </br>
 </br>
 
+&emsp;Inspirado no projeto [Api Ifood Dev Week](https://github.com/cami-la/sacola-api_IFOOD_DEV_WEEK).
+
+
+</br>
+</br>
+</br>
 <p align=left> <b>Minhas informações de contato 📬</b></p>
 <p align=left>
 <a href="https://github.com/andersonhsporto" target="_blank"><img src="https://img.shields.io/badge/Github-181717?logo=Github&logoColor=white"/></a>  
