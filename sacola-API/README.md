@@ -7,7 +7,7 @@ utilizada para servir uma aplicação com domínio de delivery, utilizando o fra
 
 ## Ferramentas Utilizadas
 
-* [JAVA 19](https://www.java.com/pt-BR/) - Linguagem de programação (JDK 18).
+* [JAVA 19](https://www.java.com/pt-BR/) - Linguagem de programação (JDK 19).
 * [Spring](https://spring.io/projects/spring-boot) - Framework MVC.
 * [Apache Maven 3.8.6](https://maven.apache.org/) - Gerenciador de dependências.
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE para desenvolvimento.
