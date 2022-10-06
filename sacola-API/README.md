@@ -1,5 +1,19 @@
 <h1>Sacola API</h1>
 
+  &emsp;Sacola Api é uma [API REST](https://www.redhat.com/pt-br/topics/api/what-is-a-rest-api)
+utilizada para servir uma aplicação com domínio de delivery, utilizando o framework
+[Spring](https://spring.io/projects/spring-boot).
+
+
+## Ferramentas Utilizadas
+
+* [JAVA 19](https://www.java.com/pt-BR/) - Linguagem de programação (JDK 18).
+* [Spring](https://spring.io/projects/spring-boot) - Framework MVC.
+* [Apache Maven 3.8.6](https://maven.apache.org/) - Gerenciador de dependências.
+* [IntelliJ](https://www.jetbrains.com/idea/) - IDE para desenvolvimento.
+* [Docker](https://www.docker.com/) - Serviço de virtualização.
+* [H2](https://www.h2database.com/html/main.html) - Banco de dados em memoria.
+
 
 <h3>Features</h3>
 
@@ -10,41 +24,20 @@
 - [x] Atualizar sacola<br>
 - [x] Docker<br>
 
-<h3>Demostração da Aplicação</h3>
-<p>Antes de começar, você precisará ter instalado em sua máquina as seguintes ferramentas:</p>
-<table>
-<tr>
-	<th>Ferramenta</th>
-	<th>Versão</th>
-</tr>
-<tr>
-	<td>Java JDK</td>
-	<td>19</td>
-</tr>
-<tr>
-	<td>Git</td>
-	<td>2.**</td>
-</tr>
-<tr>
-	<td>Maven</td>
-	<td>3.8.6</td>
-</tr>
-<tr>
-	<td>Postman</td>
-	<td>9.**</td>
-</tr>
-</table>
-<h6>** Visando facilitar a demostração da aplicação, recomendo instalar apenas o IntelliJ IDEA e rodar o projeto através da IDE **</h6>
-
-No Terminal/Console:
+Terminal/Console:
 <ol>
 	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/andersonhsporto/sacola-API.git</code></li>
 	<li>Entre na pasta raiz do projeto: <code>cd sacola-API</code></li> 
 	<li>Utilize o comando: <code>./mvn package</code></li>
-	<li>Para iniciar a api utilizando Docker use o comando: <code>docker-compose up</code></li>
 </ol>
 
-<h3>Tecnologias Utilizadas</h3>
+Para iniciar a api em ambiente docker utilize o comando abaixo na raiz do repositório:
+
+```sh
+  docker-compose up
+```
+
+<h3>Dependências Utilizadas</h3>
 
 <table>
 <tr>
@@ -77,7 +70,11 @@ No Terminal/Console:
 </tr>
 </table>
 
-Inspirado no projeto [api_IFOOD_DEV_WEEK](https://github.com/cami-la/sacola-api_IFOOD_DEV_WEEK).
+</br>
+</br>
+Inspirado no projeto [Api Ifood Dev Week](https://github.com/cami-la/sacola-api_IFOOD_DEV_WEEK).
+</br>
+</br>
 
 <p align=left> <b>Minhas informações de contato 📬</b></p>
 <p align=left>
