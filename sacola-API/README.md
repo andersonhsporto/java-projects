@@ -8,6 +8,7 @@
 - [x] Fechar sacola<br>
 - [x] Excluir item da sacola<br>
 - [x] Atualizar sacola<br>
+- [x] Docker<br>
 
 <h3>Demostração da Aplicação</h3>
 <p>Antes de começar, você precisará ter instalado em sua máquina as seguintes ferramentas:</p>
@@ -40,6 +41,7 @@ No Terminal/Console:
 	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/andersonhsporto/sacola-API.git</code></li>
 	<li>Entre na pasta raiz do projeto: <code>cd sacola-API</code></li> 
 	<li>Utilize o comando: <code>./mvn package</code></li>
+	<li>Para iniciar a api utilizando Docker use o comando: <code>docker-compose up</code></li>
 </ol>
 
 <h3>Tecnologias Utilizadas</h3>
