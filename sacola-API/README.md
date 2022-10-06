@@ -24,13 +24,15 @@ utilizada para servir uma aplicação com domínio de delivery, utilizando o fra
 - [x] Atualizar sacola<br>
 - [x] Docker<br>
 
-Terminal/Console:
+### Terminal / Console:
 <ol>
 	<li>Faça um clone do projeto na sua máquina: <code>git clone https://github.com/andersonhsporto/sacola-API.git</code></li>
 	<li>Entre na pasta raiz do projeto: <code>cd sacola-API</code></li> 
 	<li>Utilize o comando: <code>./mvn package</code></li>
 </ol>
 
+
+### Docker:
 Para iniciar a api em ambiente docker utilize o comando abaixo na raiz do repositório:
 
 ```sh
