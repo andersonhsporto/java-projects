@@ -20,7 +20,7 @@ utilizada para servir uma aplicação com domínio de delivery, utilizando o fra
 - [x] Incluir itens na sacola<br>
 - [x] Visualizar sacola<br>
 - [x] Fechar sacola<br>
-- [x] Excluir item da sacola<br>
+- [x] Excluir sacola<br>
 - [x] Atualizar sacola<br>
 - [x] Docker<br>
 
