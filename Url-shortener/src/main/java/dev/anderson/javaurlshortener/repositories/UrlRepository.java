@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UrlRepository extends MongoRepository<UrlEntity, String> {
 
+  boolean existsByUrl(String url);
+
 }
