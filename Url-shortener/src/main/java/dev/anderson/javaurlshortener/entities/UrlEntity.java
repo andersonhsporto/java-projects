@@ -1,5 +1,6 @@
 package dev.anderson.javaurlshortener.entities;
 
+import dev.anderson.javaurlshortener.Dtos.UrlDto;
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,6 +23,10 @@ public class UrlEntity {
   public UrlEntity(String url) {
     this.url = url;
     this.createdAt = LocalDateTime.now();
+  }
+
+  public static UrlEntity fromDto(UrlDto urlDto) {
+    return new UrlEntity(urlDto.url());
   }
 
   @Override

@@ -1,7 +1,7 @@
 package dev.anderson.javaurlshortener.controllers;
 
 import dev.anderson.javaurlshortener.Dtos.UrlDto;
-import dev.anderson.javaurlshortener.services.UrlService;
+import dev.anderson.javaurlshortener.services.Implementation.UrlServiceImpl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/urls")
 public class UrlController {
 
-  private final UrlService urlService;
+  private final UrlServiceImpl urlService;
 
-  public UrlController(UrlService urlService) {
+  public UrlController(UrlServiceImpl urlService) {
     this.urlService = urlService;
   }
 
   @PostMapping
-  public String createUrl(@RequestBody UrlDto urlDto) {
-    return urlService.createUrl(urlDto);
+  public String shortenUrl(@RequestBody UrlDto urlDto) {
+    System.out.println(urlDto.url());
+    return urlService.shortenUrl(urlDto);
   }
 
 
