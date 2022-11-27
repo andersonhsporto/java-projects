@@ -1,13 +1,9 @@
 package dev.anderson.javaurlshortener.services;
 
 import dev.anderson.javaurlshortener.Dtos.UrlDto;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UrlService {
+public interface UrlService {
 
-  public String createUrl(UrlDto urlDto) {
-    return "http://localhost:8080/";
-  }
+  public String shortenUrl(UrlDto url);
 
 }
