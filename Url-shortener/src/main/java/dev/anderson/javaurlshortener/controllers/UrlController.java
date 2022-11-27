@@ -1,2 +1,5 @@
-package dev.anderson.javaurlshortener.controllers;public class UrlController {
+package dev.anderson.javaurlshortener.controllers;
+
+public class UrlController {
+
 }
