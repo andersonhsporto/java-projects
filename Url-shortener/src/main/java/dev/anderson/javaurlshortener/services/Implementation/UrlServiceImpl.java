@@ -1,5 +1,6 @@
 package dev.anderson.javaurlshortener.services.Implementation;
 
+import com.google.common.hash.Hashing;
 import dev.anderson.javaurlshortener.Dtos.UrlDto;
 import dev.anderson.javaurlshortener.entities.UrlEntity;
 import dev.anderson.javaurlshortener.repositories.UrlRepository;
@@ -14,11 +15,30 @@ public class UrlServiceImpl implements UrlService {
   private UrlRepository urlRepository;
 
   @Override
-  public String shortenUrl(UrlDto url) {
+  public String shortenUrl(UrlDto urlDto) {
 
-    var urlEntity = UrlEntity.fromDto(url);
+    if (urlRepository.existsByUrl(urlDto.url())) {
+      return "Url already exists";
+    } else {
+      var hashString = hashUrl(urlDto.url());
+      var urlEntity = UrlEntity.fromDtoAndString(urlDto, hashString);
 
-    urlRepository.save(urlEntity);
-    return "Entity saved";
+      urlRepository.save(urlEntity);
+      return hashString;
+    }
+  }
+
+  @Override
+  public String hashUrl(String url) {
+    String hashString = Hashing
+        .murmur3_32_fixed()
+        .hashBytes(url.getBytes()).toString();
+
+    System.out.println("TESTE " + hashString);
+    return hashString;
   }
 }
+
+
+
+

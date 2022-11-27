@@ -6,4 +6,6 @@ public interface UrlService {
 
   public String shortenUrl(UrlDto url);
 
+  public String hashUrl(String url);
+
 }
