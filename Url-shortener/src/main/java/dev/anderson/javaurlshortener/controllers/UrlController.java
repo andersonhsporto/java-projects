@@ -2,6 +2,8 @@ package dev.anderson.javaurlshortener.controllers;
 
 import dev.anderson.javaurlshortener.Dtos.UrlDto;
 import dev.anderson.javaurlshortener.services.Implementation.UrlServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +25,9 @@ public class UrlController {
     return urlService.shortenUrl(urlDto);
   }
 
+  @GetMapping
+  public ResponseEntity<?> handleUrl(@RequestBody UrlDto urlDto) {
+    return urlService.handleUrl(urlDto);
+  }
 
 }
