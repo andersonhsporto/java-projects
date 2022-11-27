@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UrlServiceImpl implements UrlService {
 
+  private final UrlRepository urlRepository;
+
   @Autowired
-  private UrlRepository urlRepository;
+  public UrlServiceImpl(UrlRepository urlRepository) {
+    this.urlRepository = urlRepository;
+  }
 
   @Override
   public String shortenUrl(UrlDto urlDto) {
