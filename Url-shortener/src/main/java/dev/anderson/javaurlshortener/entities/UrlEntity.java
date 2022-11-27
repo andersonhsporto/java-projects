@@ -15,18 +15,31 @@ public class UrlEntity {
 
   private LocalDateTime createdAt;
 
-
   public UrlEntity() {
-
   }
 
-  public UrlEntity(String url) {
+  public UrlEntity(String url, LocalDateTime createdAt) {
     this.url = url;
-    this.createdAt = LocalDateTime.now();
+    this.createdAt = createdAt;
   }
 
   public static UrlEntity fromDto(UrlDto urlDto) {
-    return new UrlEntity(urlDto.url());
+    return new UrlEntity(
+        urlDto.url(),
+        LocalDateTime.now()
+    );
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
   }
 
   @Override
