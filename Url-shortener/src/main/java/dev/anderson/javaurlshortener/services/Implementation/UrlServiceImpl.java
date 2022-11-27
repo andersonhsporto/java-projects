@@ -6,6 +6,7 @@ import dev.anderson.javaurlshortener.entities.UrlEntity;
 import dev.anderson.javaurlshortener.repositories.UrlRepository;
 import dev.anderson.javaurlshortener.services.UrlService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,6 +37,17 @@ public class UrlServiceImpl implements UrlService {
 
     System.out.println("TESTE " + hashString);
     return hashString;
+  }
+
+  @Override
+  public ResponseEntity<?> handleUrl(UrlDto urlDto) {
+    var urlEntity = urlRepository.findByShortUrl(urlDto.url());
+
+    if (urlEntity.isPresent()) {
+      return ResponseEntity.ok(urlEntity.get().getUrl());
+    } else {
+      return ResponseEntity.notFound().build();
+    }
   }
 }
 
