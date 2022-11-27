@@ -2,7 +2,9 @@ package dev.anderson.javaurlshortener.repositories;
 
 import dev.anderson.javaurlshortener.entities.UrlEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public class UrlRepository extends MongoRepository<UrlEntity, String> {
+@Repository
+public interface UrlRepository extends MongoRepository<UrlEntity, String> {
 
 }
