@@ -31,12 +31,9 @@ public class UrlServiceImpl implements UrlService {
 
   @Override
   public String hashUrl(String url) {
-    String hashString = Hashing
+    return Hashing
         .murmur3_32_fixed()
         .hashBytes(url.getBytes()).toString();
-
-    System.out.println("TESTE " + hashString);
-    return hashString;
   }
 
   @Override
