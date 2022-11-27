@@ -13,6 +13,8 @@ public class UrlEntity {
 
   private String url;
 
+  private String shortUrl;
+
   private LocalDateTime createdAt;
 
   public UrlEntity() {
@@ -23,9 +25,23 @@ public class UrlEntity {
     this.createdAt = createdAt;
   }
 
+  public UrlEntity(String url, String shortUrl, LocalDateTime createdAt) {
+    this.url = url;
+    this.shortUrl = shortUrl;
+    this.createdAt = createdAt;
+  }
+
   public static UrlEntity fromDto(UrlDto urlDto) {
     return new UrlEntity(
         urlDto.url(),
+        LocalDateTime.now()
+    );
+  }
+
+  public static UrlEntity fromDtoAndString(UrlDto urlDto, String shortUrl) {
+    return new UrlEntity(
+        urlDto.url(),
+        shortUrl,
         LocalDateTime.now()
     );
   }
@@ -42,12 +58,17 @@ public class UrlEntity {
     return createdAt;
   }
 
+  public String getShortUrl() {
+    return shortUrl;
+  }
+
   @Override
   public String toString() {
-    return "UrlEntity {" +
-        "id = '" + id + '\'' +
-        ", url = '" + url + '\'' +
-        ", createdAt = " + createdAt +
+    return "UrlEntity { " +
+        "id ='" + id + '\'' +
+        ", url ='" + url + '\'' +
+        ", shortUrl ='" + shortUrl + '\'' +
+        ", createdAt =" + createdAt +
         '}';
   }
 }
