@@ -12,4 +12,6 @@ public class InputTransferDTO {
 
   private OffsetDateTime finalDate;
 
+  private String operatorName;
+
 }
