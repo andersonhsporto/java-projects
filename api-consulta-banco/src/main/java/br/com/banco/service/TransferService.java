@@ -4,6 +4,8 @@ import br.com.banco.DTO.InputTransferDTO;
 import br.com.banco.DTO.TransferDTO;
 import br.com.banco.domain.TransferEntity;
 import br.com.banco.repository.TransferRepository;
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,27 @@ public class TransferService {
   }
 
   public ResponseEntity<?> getTransferBetweenTwoDates(InputTransferDTO inputTransferDTO) {
-    return null;
+    OffsetDateTime initialDate = inputTransferDTO.getInitialDate();
+    OffsetDateTime finalDate = inputTransferDTO.getFinalDate();
+    List<TransferEntity> entity = transferRepository.findByTransferDateBetween(initialDate,
+        finalDate);
+
+    if (entity.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    } else {
+      return ResponseEntity.ok(TransferDTO.fromEntityList(entity));
+    }
+  }
+
+  public ResponseEntity<?> getTransferByOperatorName(InputTransferDTO inputTransferDTO) {
+    String operatorName = inputTransferDTO.getOperatorName();
+    List<TransferEntity> entity = transferRepository.findByOperatorName(operatorName);
+
+    if (entity.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    } else {
+      return ResponseEntity.ok(TransferDTO.fromEntityList(entity));
+    }
   }
 
 }

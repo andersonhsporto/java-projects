@@ -32,4 +32,12 @@ public class TransferController {
     return transferService.getTransferBetweenTwoDates(inputTransferDTO);
   }
 
+  @ApiOperation(value = "Get all transfer related toa a given account name")
+  @GetMapping("/operator-name")
+  public ResponseEntity<?> getTransferByOperatorName(
+      @RequestBody InputTransferDTO inputTransferDTO) {
+    return transferService.getTransferByOperatorName(inputTransferDTO);
+  }
+
+
 }
