@@ -1,4 +1,4 @@
-package br.com.banco.DTO;
+package br.com.banco.domain.DTO;
 
 import br.com.banco.domain.AccountEntity;
 import java.util.ArrayList;
