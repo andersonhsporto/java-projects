@@ -1,6 +1,6 @@
 package br.com.banco.controller;
 
-import br.com.banco.DTO.InputTransferDTO;
+import br.com.banco.domain.DTO.InputTransferDTO;
 import br.com.banco.service.TransferService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,8 @@ public class TransferController {
 
   @ApiOperation(value = "Return a list of all transfers using a given id")
   @GetMapping
-  public ResponseEntity<?> getByTransferId() {
-    return transferService.getByTransferId();
+  public ResponseEntity<?> getByTransferId(@RequestBody InputTransferDTO inputTransferDTO) {
+    return transferService.getByTransferId(inputTransferDTO);
   }
 
   @ApiOperation(value = "Get all transfer between two dates")
@@ -31,5 +31,13 @@ public class TransferController {
       @RequestBody InputTransferDTO inputTransferDTO) {
     return transferService.getTransferBetweenTwoDates(inputTransferDTO);
   }
+
+  @ApiOperation(value = "Get all transfer related to a given account name")
+  @GetMapping("/operator-name")
+  public ResponseEntity<?> getTransferByOperatorName(
+      @RequestBody InputTransferDTO inputTransferDTO) {
+    return transferService.getTransferByOperatorName(inputTransferDTO);
+  }
+
 
 }

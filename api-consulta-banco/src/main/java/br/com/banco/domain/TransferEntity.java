@@ -1,6 +1,5 @@
 package br.com.banco.domain;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +36,7 @@ public class TransferEntity {
   private OffsetDateTime transferDate;
 
   @Column(name = "valor", nullable = false, precision = 22, scale = 2)
-  private BigDecimal value;
+  private float value;
 
   @Column(name = "tipo", nullable = false, length = 15)
   private String type;
