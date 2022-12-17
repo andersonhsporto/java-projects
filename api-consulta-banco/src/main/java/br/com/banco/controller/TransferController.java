@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/transfers")
-public class Transfer {
+public class TransferController {
+
+  private Long id;
+
+
 
 }
