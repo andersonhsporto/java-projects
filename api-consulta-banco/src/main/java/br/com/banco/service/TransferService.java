@@ -1,5 +1,6 @@
 package br.com.banco.service;
 
+import br.com.banco.DTO.InputTransferDTO;
 import br.com.banco.DTO.TransferDTO;
 import br.com.banco.domain.TransferEntity;
 import br.com.banco.repository.TransferRepository;
@@ -22,6 +23,10 @@ public class TransferService {
     } else {
       return ResponseEntity.notFound().build();
     }
+  }
+
+  public ResponseEntity<?> getTransferBetweenTwoDates(InputTransferDTO inputTransferDTO) {
+    return null;
   }
 
 }
