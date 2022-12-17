@@ -1,7 +1,7 @@
 package br.com.banco.DTO;
 
 import br.com.banco.domain.TransferEntity;
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class TransferDTO {
 
   private OffsetDateTime transferDate;
 
-  private BigDecimal value;
+  private float value;
 
   private String type;
 
@@ -26,7 +26,7 @@ public class TransferDTO {
     return new TransferDTO(
         transferEntity.getId(),
         transferEntity.getTransferDate(),
-        transferEntity.getValue(),
+        truncate(transferEntity.getValue()),
         transferEntity.getType(),
         transferEntity.getOperatorName()
     );
@@ -39,6 +39,12 @@ public class TransferDTO {
       transferDTOList.add(fromEntity(transferEntity));
     }
     return transferDTOList;
+  }
+
+  private static float truncate(float value) {
+    DecimalFormat twoDForm = new DecimalFormat("#.##");
+
+    return Float.valueOf(twoDForm.format(value));
   }
 
 
