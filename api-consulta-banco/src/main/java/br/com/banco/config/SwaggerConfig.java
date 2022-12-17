@@ -1,7 +1,7 @@
 package br.com.banco.config;
 
-import br.com.banco.DTO.AccountDTO;
-import br.com.banco.DTO.TransferDTO;
+import br.com.banco.domain.DTO.AccountDTO;
+import br.com.banco.domain.DTO.TransferDTO;
 import com.fasterxml.classmate.TypeResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
