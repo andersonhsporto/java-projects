@@ -1,6 +1,6 @@
 package br.com.banco.domain;
 
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +34,6 @@ public class AccountEntity {
   private String name;
 
   @OneToMany(mappedBy = "conta")
-  private Set<TransferEntity> contaTransferencias;
+  private List<TransferEntity> accountTransfers;
 
 }
