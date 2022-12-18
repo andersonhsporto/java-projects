@@ -22,4 +22,16 @@ public class AccountService {
     return ResponseEntity.ok(AccountDTO.fromEntityList(accountEntityList));
   }
 
+  @Transactional
+  public ResponseEntity<?> getAccountById(Long id) {
+    try {
+      AccountEntity accountEntity = accountRepository.findById(id).orElseThrow();
+
+      return ResponseEntity.ok(AccountDTO.fromEntity(accountEntity));
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Conta não encontrada");
+    }
+  }
+
+
 }
