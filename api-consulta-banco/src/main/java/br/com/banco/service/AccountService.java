@@ -4,10 +4,10 @@ import br.com.banco.domain.AccountEntity;
 import br.com.banco.domain.DTO.AccountDTO;
 import br.com.banco.repository.AccountRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
