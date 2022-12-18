@@ -19,29 +19,29 @@
 - Caso queira executar a aplicação via linha de comando, execute primeiramente o comando:
 
 ```
-                   ./mvnw clean package  para linux.
+./mvnw clean package  para linux.
 
-                   .\mvnw clean package  para windows.
+.\mvnw clean package  para windows.
 ```
 
 - Após isso execute o comando:
 
 ```
-                             java -jar <...caminhoParaSeuJar>
+java -jar <...caminhoParaSeuJar>
 ```
 
 - Para executar os testes unitários, execute o comando:
 
 ```
-                     ./mvnw clean test  para linux.
+./mvnw clean test  para linux.
 
-                     .\mvnw clean test  para windows.
+.\mvnw clean test  para windows.
 ```
 
 - Para executar a aplicação via docker, execute o comando:
 
 ```
-                     docker-compose up 
+docker-compose up 
 ```
 
 ## Requisitos de sistema
