@@ -23,7 +23,7 @@ public class AccountController {
   }
 
   @GetMapping("/number")
-  public ResponseEntity<?> getAccountById(@RequestParam(required = false) Long id) {
+  public ResponseEntity<?> getAccountById(@RequestParam(required = true) Long id) {
     return accountService.getAccountById(id);
   }
 
