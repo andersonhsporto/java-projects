@@ -24,4 +24,8 @@ public class InputTransferDTO {
     return operatorName != null && !operatorName.isEmpty();
   }
 
+  public boolean isValidDate() {
+    return initialDate != null && finalDate != null;
+  }
+
 }
