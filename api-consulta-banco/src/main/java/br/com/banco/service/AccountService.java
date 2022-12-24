@@ -24,11 +24,25 @@ public class AccountService {
 
   private final TransferRepository transferRepository;
 
+  public ResponseEntity<?> getAccount(InputTransferDTO inputTransferDTO) {
+
+    if (inputTransferDTO.isValidNameAndDate()) {
+      return getAccountByDateAndName(inputTransferDTO);
+    } else if (inputTransferDTO.isValidDate()) {
+      return getAccountByDate(inputTransferDTO);
+    } else if (inputTransferDTO.isValidOperatorName()) {
+      return getAccountByName(inputTransferDTO);
+    } else {
+      System.out.println("getAccountById");
+      return getAccountById(inputTransferDTO);
+    }
+  }
+
   @Transactional
-  public ResponseEntity<?> getAccountById(Long id, Integer page, Integer size) {
+  public ResponseEntity<?> getAccountById(InputTransferDTO inputTransferDTO) {
     try {
 
-      return findAccountById(id, page, size);
+      return findAccountById(inputTransferDTO);
 
     } catch (Exception e) {
 
@@ -38,15 +52,10 @@ public class AccountService {
   }
 
   @Transactional
-  public ResponseEntity<?> getAccountByDate(
-      Long id,
-      Integer page,
-      Integer size,
-      InputTransferDTO inputTransferDTO
-  ) {
+  public ResponseEntity<?> getAccountByDate(InputTransferDTO inputTransferDTO) {
     try {
 
-      return findAccountByDate(id, page, size, inputTransferDTO);
+      return findAccountByDate(inputTransferDTO);
 
     } catch (Exception e) {
 
@@ -56,15 +65,10 @@ public class AccountService {
   }
 
   @Transactional
-  public ResponseEntity<?> getAccountByName(
-      Long id,
-      Integer page,
-      Integer size,
-      InputTransferDTO inputTransferDTO
-  ) {
+  public ResponseEntity<?> getAccountByName(InputTransferDTO inputTransferDTO) {
     try {
 
-      return findAccountByName(id, page, size, inputTransferDTO);
+      return findAccountByName(inputTransferDTO);
 
     } catch (Exception e) {
 
@@ -73,11 +77,24 @@ public class AccountService {
     }
   }
 
+  @Transactional
+  public ResponseEntity<?> getAccountByDateAndName(InputTransferDTO inputTransferDTO) {
+    try {
 
-  private ResponseEntity<?> findAccountById(Long id, Integer page, Integer size) {
+      return findAccountByDateAndName(inputTransferDTO);
 
-    Pageable pageRequest = PageRequest.of(page, size);
-    AccountEntity accountEntity = accountRepository.findById(id).orElseThrow();
+    } catch (Exception e) {
+
+      return ResponseEntity.badRequest().body("Conta não encontrada" + e.getMessage());
+
+    }
+  }
+
+  private ResponseEntity<?> findAccountById(InputTransferDTO inputTransferDTO) {
+
+    Pageable pageRequest = PageRequest.of(inputTransferDTO.getPage(), inputTransferDTO.getSize());
+    AccountEntity accountEntity = accountRepository.findById(inputTransferDTO.getId())
+        .orElseThrow();
     Page<TransferEntity> transferEntities = transferRepository.findAllByConta(
         accountEntity, pageRequest);
     HttpHeaders headers = getHeaders(transferEntities);
@@ -88,14 +105,11 @@ public class AccountService {
         HttpStatus.OK);
   }
 
-  private ResponseEntity<?> findAccountByDate(
-      Long id,
-      Integer page,
-      Integer size,
-      InputTransferDTO inputTransferDTO) {
+  private ResponseEntity<?> findAccountByDate(InputTransferDTO inputTransferDTO) {
 
-    Pageable pageRequest = PageRequest.of(page, size);
-    AccountEntity accountEntity = accountRepository.findById(id).orElseThrow();
+    Pageable pageRequest = PageRequest.of(inputTransferDTO.getPage(), inputTransferDTO.getSize());
+    AccountEntity accountEntity = accountRepository.findById(inputTransferDTO.getId())
+        .orElseThrow();
     Page<TransferEntity> transferEntities = transferRepository.findAllByContaAndTransferDateBetween(
         accountEntity,
         pageRequest,
@@ -109,18 +123,32 @@ public class AccountService {
         HttpStatus.OK);
   }
 
-  private ResponseEntity<?> findAccountByName(
-      Long id,
-      Integer page,
-      Integer size,
-      InputTransferDTO inputTransferDTO) {
+  private ResponseEntity<?> findAccountByName(InputTransferDTO inputTransferDTO) {
 
-    Pageable pageRequest = PageRequest.of(page, size);
-    AccountEntity accountEntity = accountRepository.findById(id).orElseThrow();
+    Pageable pageRequest = PageRequest.of(inputTransferDTO.getPage(), inputTransferDTO.getSize());
+    AccountEntity accountEntity = accountRepository.findById(inputTransferDTO.getId())
+        .orElseThrow();
     Page<TransferEntity> transferEntities = transferRepository.findAllByContaAndOperatorName(
         accountEntity,
         pageRequest,
         inputTransferDTO.getOperatorName());
+    HttpHeaders headers = getHeaders(transferEntities);
+
+    return new ResponseEntity<>(
+        AccountDTO.fromEntityAndPage(accountEntity, transferEntities, inputTransferDTO),
+        headers,
+        HttpStatus.OK);
+  }
+
+  private ResponseEntity<?> findAccountByDateAndName(InputTransferDTO inputTransferDTO) {
+
+    Pageable pageRequest = PageRequest.of(inputTransferDTO.getPage(), inputTransferDTO.getSize());
+    AccountEntity accountEntity = accountRepository.findById(inputTransferDTO.getId())
+        .orElseThrow();
+    Page<TransferEntity> transferEntities = getPageTransferEntities(
+        accountEntity,
+        pageRequest,
+        inputTransferDTO);
     HttpHeaders headers = getHeaders(transferEntities);
 
     return new ResponseEntity<>(
@@ -137,4 +165,16 @@ public class AccountService {
     return headers;
   }
 
+  private Page<TransferEntity> getPageTransferEntities(
+      AccountEntity accountEntity,
+      Pageable pageRequest,
+      InputTransferDTO inputTransferDTO
+  ) {
+    return transferRepository.findAllByContaAndOperatorNameAndTransferDateBetween(
+        accountEntity,
+        pageRequest,
+        inputTransferDTO.getOperatorName(),
+        inputTransferDTO.getInitialDate(),
+        inputTransferDTO.getFinalDate());
+  }
 }

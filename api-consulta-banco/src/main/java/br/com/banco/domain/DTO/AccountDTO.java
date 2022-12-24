@@ -63,7 +63,8 @@ public class AccountDTO {
     return accountDTOList;
   }
 
-  private static float calculateBalanceP(AccountEntity accountEntity,
+  private static float calculateBalanceP(
+      AccountEntity accountEntity,
       InputTransferDTO inputTransferDTO) {
     float balance = 0;
 
@@ -71,14 +72,17 @@ public class AccountDTO {
       return calculateBalance(accountEntity.getAccountTransfers());
     }
 
-    if (inputTransferDTO.isValidOperatorName()) {
+    if (inputTransferDTO.isValidNameAndDate()) {
+      return balanceByNameAndDate(accountEntity, inputTransferDTO);
+    } else if (inputTransferDTO.isValidOperatorName()) {
       return balanceByName(accountEntity, inputTransferDTO);
     } else if (inputTransferDTO.isValidDate()) {
       return balanceByDate(accountEntity, inputTransferDTO);
     } else {
-      return calculateBalance(accountEntity.getAccountTransfers());
+      return balance;
     }
   }
+
 
   private static float balanceByName(AccountEntity accountEntity,
       InputTransferDTO inputTransferDTO) {
@@ -112,6 +116,25 @@ public class AccountDTO {
     float balance = 0;
     for (TransferEntity transferEntity : transferDTOList) {
       balance += transferEntity.getValue();
+    }
+    return balance;
+  }
+
+  private static float balanceByNameAndDate(
+      AccountEntity accountEntity,
+      InputTransferDTO inputTransferDTO
+  ) {
+    float balance = 0;
+
+    for (TransferEntity transferEntity : accountEntity.getAccountTransfers()) {
+      Optional<String> operatorName = Optional.ofNullable(transferEntity.getOperatorName());
+
+      if (operatorName.isPresent() && operatorName.get()
+          .equals(inputTransferDTO.getOperatorName())
+          && transferEntity.getTransferDate().isAfter(inputTransferDTO.getInitialDate())
+          && transferEntity.getTransferDate().isBefore(inputTransferDTO.getFinalDate())) {
+        balance += transferEntity.getValue();
+      }
     }
     return balance;
   }
