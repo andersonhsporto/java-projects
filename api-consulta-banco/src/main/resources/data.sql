@@ -38,3 +38,10 @@ INSERT INTO transferencia (id, data_transferencia, valor, tipo, nome_operador_tr
 VALUES (6, '2021-04-01 12:12:04+03', 25173.09, 'TRANSFERENCIA', 'Ronnyscley', 2);
 INSERT INTO transferencia (id, data_transferencia, valor, tipo, nome_operador_transacao, conta_id)
 VALUES (7, '2021-04-01 12:12:04+03', 42.00, 'TRANSFERENCIA', 'Beltrano', 2);
+
+INSERT INTO transferencia (id, data_transferencia, valor, tipo, nome_operador_transacao, conta_id)
+VALUES (8, '2021-04-01 12:12:04+03', -42.00, 'TRANSFERENCIA', 'Beltrano', 2);
+INSERT INTO transferencia (id, data_transferencia, valor, tipo, nome_operador_transacao, conta_id)
+VALUES (9, '2021-04-01 12:12:04+03', -128.00, 'TRANSFERENCIA', 'Beltrano', 2);
+INSERT INTO transferencia (id, data_transferencia, valor, tipo, nome_operador_transacao, conta_id)
+VALUES (10, '2022-12-22 12:12:04+03', -42.00, 'TRANSFERENCIA', 'Anderson', 2);

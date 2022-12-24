@@ -2,8 +2,7 @@ package br.com.banco.service;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import br.com.banco.domain.DTO.AccountDTO;
-import java.util.List;
+import br.com.banco.domain.DTO.InputTransferDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,43 +21,20 @@ class AccountServiceTest {
   private AccountService accountService;
 
   @Test
-  @DisplayName("Test if getAllAccount return status 200")
-  void getAllAccount_should_return_status_200_OK() {
-    ResponseEntity<?> response = accountService.getAllAccount();
+  @DisplayName("Test if getAccountBy returns status 200")
+  void getAccountBy() {
+    ResponseEntity<?> response = accountService.getAccountById(
+        InputTransferDTO.of(
+            1L,
+            0,
+            4,
+            "1990-12-20T00:00:00Z",
+            "1990-12-20T00:00:00Z",
+            "null")
+    );
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
   }
 
-  @Test
-  @DisplayName("Test if getAllAccount return a list of accounts")
-  void getAllAccount_should_return_a_list_of_accounts() {
-    ResponseEntity<?> response = accountService.getAllAccount();
-
-    assertThat(response.getBody()).isInstanceOf(List.class);
-  }
-
-  @Test
-  @DisplayName("Test if getAccountById return status 200")
-  void getAccountById_should_return_status_200_OK() {
-    ResponseEntity<?> response = accountService.getAccountById(1L);
-
-    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-  }
-
-  @Test
-  @DisplayName("Test if getAccountById return a account")
-  void getAccountById_should_return_a_account() {
-    ResponseEntity<?> response = accountService.getAccountById(1L);
-
-    assertThat(response.getBody()).isInstanceOf(AccountDTO.class);
-  }
-
-  @Test
-  @DisplayName("Test if getAccountById return status 400")
-  void getAccountById_should_return_status_400_BAD_REQUEST() {
-    ResponseEntity<?> response = accountService.getAccountById(100L);
-
-    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-  }
 
 }
