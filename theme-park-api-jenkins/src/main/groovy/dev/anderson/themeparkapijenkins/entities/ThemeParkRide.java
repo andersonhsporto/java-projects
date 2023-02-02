@@ -34,12 +34,6 @@ public class ThemeParkRide {
     this.vomitFactor = vomitFactor;
   }
 
-  public static ThemeParkRide builder(
-      String name, String description, int thrillFactor, int vomitFactor
-  ) {
-    return new ThemeParkRide(name, description, thrillFactor, vomitFactor);
-  }
-
   public static ThemeParkRide fromDTO(ThemeParkDTO themeParkDTO) {
     return new ThemeParkRide(
         themeParkDTO.name(),
