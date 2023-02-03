@@ -36,6 +36,9 @@ test {
     useJUnitPlatform()
 }
 
+tasks.create('testAll', Test) {
+    useJUnitPlatform()
+}
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(19))
