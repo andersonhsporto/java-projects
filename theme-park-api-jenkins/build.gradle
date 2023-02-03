@@ -8,20 +8,9 @@ plugins {
 
 group = 'dev.anderson'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
 repositories {
     mavenCentral()
-}
-
-test {
-    useJUnitPlatform()
 }
 
 dependencies {
@@ -37,6 +26,17 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+test {
     useJUnitPlatform()
+}
+
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(19))
 }
