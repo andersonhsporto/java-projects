@@ -1,5 +1,6 @@
 package dev.anderson.livraria.controller;
 
+import dev.anderson.livraria.exception.BookNotFoundException;
 import dev.anderson.livraria.exception.DuplicatedBookException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
-  @ExceptionHandler(value = {DuplicatedBookException.class})
+  @ExceptionHandler({
+      BookNotFoundException.class,
+      DuplicatedBookException.class
+  })
   protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
     return handleExceptionInternal(
         ex,
