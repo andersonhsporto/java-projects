@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,27 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/livraria/livros")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class LivrariaController {
 
   private final LivrariaService livrariaService;
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public LivroEntity cadastraLivro(@Valid @RequestBody LivroEntity livro) {
+  public LivroEntity insertBook(@Valid @RequestBody LivroEntity livro) {
     return livrariaService.insertBook(livro);
 
   }
 
-  @GetMapping
-  @ResponseStatus(HttpStatus.OK)
-  public List<LivroEntity> getAllbooks() {
-    return livrariaService.getAllBooks();
-  }
-
-  @GetMapping("/find")
+  @GetMapping("/{name}/{year}")
   @ResponseStatus(HttpStatus.OK)
   public LivroEntity getBookByNameAndYear(@PathVariable String name, @PathVariable Integer year) {
     return livrariaService.getBookByNameAndYear(name, year);
+  }
+
+  @GetMapping("/all")
+  @ResponseStatus(HttpStatus.OK)
+  public List<LivroEntity> getAllbooks() {
+    return livrariaService.getAllBooks();
   }
 
   @DeleteMapping("/{id}")
@@ -53,6 +55,5 @@ public class LivrariaController {
   public LivroEntity updateBook(@PathVariable Long id, @Valid @RequestBody LivroEntity livro) {
     return livrariaService.updateBook(id, livro);
   }
-
 
 }
