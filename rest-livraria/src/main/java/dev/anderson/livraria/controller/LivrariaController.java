@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,9 +32,9 @@ public class LivrariaController {
     return livrariaService.insertBook(livro);
   }
 
-  @GetMapping("/{name}/{year}")
+  @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public LivroEntity getBookByNameAndYear(@PathVariable String name, @PathVariable Integer year) {
+  public LivroEntity getBookByNameAndYear(@RequestParam String name, @RequestParam Integer year) {
     return livrariaService.getBookByNameAndYear(name, year);
   }
 
@@ -43,15 +44,15 @@ public class LivrariaController {
     return livrariaService.getAllBooks();
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping
   @ResponseStatus(HttpStatus.OK)
-  public void deleteBook(@PathVariable Long id) {
+  public void deleteBook(@RequestParam Long id) {
     livrariaService.deleteBook(id);
   }
 
-  @PatchMapping("/{id}")
+  @PatchMapping
   @ResponseStatus(HttpStatus.OK)
-  public LivroEntity updateBook(@PathVariable Long id, @Valid @RequestBody LivroEntity livro) {
+  public LivroEntity updateBook(@RequestParam Long id, @Valid @RequestBody LivroEntity livro) {
     return livrariaService.updateBook(id, livro);
   }
 
