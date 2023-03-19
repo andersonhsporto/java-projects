@@ -16,7 +16,7 @@
 
 ## Como executar a aplicação
 
-&emsp;Para executar a aplicação, você pode utilizar a IDE de sua preferência ou executar via linha de comando ou via docker.
+&emsp;Para executar a aplicação, você pode utilizar a IDE de sua preferência, executar via linha de comando ou via docker.
 </br>
 - Caso queira executar a aplicação via linha de comando, execute primeiramente o comando:
 
