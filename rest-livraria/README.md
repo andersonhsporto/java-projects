@@ -2,7 +2,7 @@
 
 ## Descrição
 
-- Api rest implentando operações de uma livraria utilizando spring boot e banco de dados em memória.
+&emsp;Api rest implentando operações de uma livraria utilizando spring boot e banco de dados em memória.
 
 ## Ferramentas Utilizadas
 
@@ -11,11 +11,12 @@
 * [Apache Maven 3.8.6](https://maven.apache.org/) - Gerenciador de dependências.
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE para desenvolvimento.
 * [Docker](https://www.docker.com/) - Serviço de virtualização.
+* [H2 Database](https://www.h2database.com/html/main.html) - Banco de dados relacional escrito em Java que funciona em memória.
+
 
 ## Como executar a aplicação
 
-&emsp;Você pode executar a aplicação da maneira que quiser e utilizando a IDE de sua preferência ou
-via linha de comando.
+&emsp;Para executar a aplicação, você pode utilizar a IDE de sua preferência ou executar via linha de comando ou via docker.
 </br>
 - Caso queira executar a aplicação via linha de comando, execute primeiramente o comando:
 
@@ -61,12 +62,13 @@ arquivo [pom.xml](https://github.com/andersonhsporto/rest-livraria/blob/master/p
 |          H2database          | Banco de dados relacional escrito em Java que funciona em memória | 2.1.214 |
 | Spring-boot-starter-data-jpa | Responsável por conectar a aplicação Spring como o banco de dados |  2.7.9  |
 |   Spring-boot-starter-web    |               Responsável pela camada MVC do Spring               |  2.7.9  |
+|      Springfox-swagger       | Biblioteca para documentação da API | 3.0.0 |
 |        Junit-jupiter         |                  Framework para testes unitários                  |  5.9.1  |
 |        Project-lombok        |          Biblioteca para reduzir a verbosidade do código          | 1.18.20 |
 
 
-<p align=left> <b>Minhas informações de contato 📬</b></p>
-<p align=left>
+<p align=center> <b>Minhas informações de contato 📬</b></p>
+<p align=center>
 <a href="https://github.com/andersonhsporto" target="_blank"><img src="https://img.shields.io/badge/Github-181717?logo=Github&logoColor=white"/></a>  
 <a href="mailto:anderson.higo2@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Gmail-EA4335?logo=Gmail&logoColor=white"/></a>
 <a href= "https://www.linkedin.com/in/andersonhsporto/"target="_blank"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?logo=linkedin&logoColor=white"/></a>
