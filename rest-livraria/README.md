@@ -14,7 +14,9 @@
 
 ## Como executar a aplicação
 
-- Você pode executar a aplicação da maneira que quiser e utilizando a IDE de sua preferência.
+&emsp;Você pode executar a aplicação da maneira que quiser e utilizando a IDE de sua preferência ou
+via linha de comando.
+</br>
 - Caso queira executar a aplicação via linha de comando, execute primeiramente o comando:
 
 ```
@@ -38,7 +40,6 @@ java -jar <...caminhoParaSeuJar>
 ```
 
 - Para executar a aplicação via docker, execute o comando:
-
 ```
 docker-compose up 
 ```
