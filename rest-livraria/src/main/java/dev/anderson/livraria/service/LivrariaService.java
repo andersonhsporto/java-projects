@@ -16,7 +16,7 @@ public class LivrariaService {
 
   public LivroEntity insertBook(LivroEntity livro) {
     if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
-      throw new DuplicatedBookException(HttpStatus.BAD_REQUEST, "LivroEntity is duplicated");
+      throw new DuplicatedBookException(HttpStatus.BAD_REQUEST, "Livro já cadastrado");
     } else {
       return livrariaRepository.save(livro);
     }

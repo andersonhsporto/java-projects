@@ -14,11 +14,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = {DuplicatedBookException.class})
   protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-    String bodyOfResponse = "Livro já cadastrado";
-
     return handleExceptionInternal(
         ex,
-        bodyOfResponse,
+        ex.getMessage(),
         new HttpHeaders(),
         HttpStatus.BAD_REQUEST,
         request
