@@ -1,4 +1,4 @@
-# Consulta Banco API
+# Livraria API
 
 ## Descrição
 
