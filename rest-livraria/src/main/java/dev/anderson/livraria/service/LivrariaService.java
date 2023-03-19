@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class LivrariaService {
 
-  LivrariaRepository livrariaRepository;
+  private LivrariaRepository livrariaRepository;
 
   public LivroEntity insertBook(LivroEntity livro) {
     if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
