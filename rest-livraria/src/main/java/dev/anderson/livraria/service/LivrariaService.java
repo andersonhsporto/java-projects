@@ -42,8 +42,10 @@ public class LivrariaService {
 
   public LivroEntity updateBook(Long id, LivroEntity livro) {
     if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
-      throw new DuplicatedBookException(HttpStatus.BAD_REQUEST,
-          "Já existe um livro com esse nome e ano");
+      throw new DuplicatedBookException(
+          HttpStatus.BAD_REQUEST,
+          "Já existe um livro com esse nome e ano"
+      );
     }
 
     LivroEntity livroEntity = livrariaRepository
