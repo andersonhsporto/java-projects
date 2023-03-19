@@ -50,7 +50,7 @@ public class LivrariaController {
 
   @PatchMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public LivroEntity updateBook(@PathVariable Long id, @RequestBody LivroEntity livro) {
+  public LivroEntity updateBook(@PathVariable Long id, @Valid @RequestBody LivroEntity livro) {
     return livrariaService.updateBook(id, livro);
   }
 
