@@ -1,5 +1,6 @@
 package dev.anderson.livraria.entity;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,4 +32,21 @@ public class LivroEntity {
     this.year = livro.year;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LivroEntity that = (LivroEntity) o;
+    return Objects.equals(id, that.id) && Objects.equals(name, that.name)
+        && Objects.equals(year, that.year);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, year);
+  }
 }

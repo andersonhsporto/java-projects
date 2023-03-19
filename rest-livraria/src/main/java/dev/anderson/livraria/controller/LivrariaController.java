@@ -29,7 +29,6 @@ public class LivrariaController {
   @ResponseStatus(HttpStatus.CREATED)
   public LivroEntity insertBook(@Valid @RequestBody LivroEntity livro) {
     return livrariaService.insertBook(livro);
-
   }
 
   @GetMapping("/{name}/{year}")
