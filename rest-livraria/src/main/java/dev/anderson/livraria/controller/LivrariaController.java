@@ -4,6 +4,7 @@ import dev.anderson.livraria.entity.LivroEntity;
 import dev.anderson.livraria.service.LivrariaService;
 import java.util.List;
 import javax.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/livraria/livros")
+@AllArgsConstructor
 public class LivrariaController {
 
   private final LivrariaService livrariaService;
-
-  public LivrariaController(LivrariaService service) {
-    this.livrariaService = service;
-  }
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
