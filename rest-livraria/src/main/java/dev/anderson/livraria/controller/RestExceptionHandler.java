@@ -2,6 +2,7 @@ package dev.anderson.livraria.controller;
 
 import dev.anderson.livraria.exception.BookNotFoundException;
 import dev.anderson.livraria.exception.DuplicatedBookException;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ex.getMessage(),
         new HttpHeaders(),
         HttpStatus.BAD_REQUEST,
+        request
+    );
+  }
+
+  @ExceptionHandler({
+      EntityNotFoundException.class
+  })
+  protected ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
+    return handleExceptionInternal(
+        ex,
+        "Livro não encontrado.",
+        new HttpHeaders(),
+        HttpStatus.NOT_FOUND,
         request
     );
   }
