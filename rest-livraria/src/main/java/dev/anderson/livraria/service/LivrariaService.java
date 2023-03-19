@@ -26,5 +26,19 @@ public class LivrariaService {
     return livrariaRepository.findAll();
   }
 
+  public LivroEntity getBookByNameAndYear(String name, Integer year) {
+    return livrariaRepository.findByNameAndYear(name, year);
+  }
+
+  public void deleteBook(Long id) {
+    livrariaRepository.deleteById(id);
+  }
+
+  public LivroEntity updateBook(Long id, LivroEntity livro) {
+    LivroEntity livroEntity = livrariaRepository.findById(id).get();
+    livroEntity.update(livro);
+    return livrariaRepository.save(livroEntity);
+  }
+
 
 }

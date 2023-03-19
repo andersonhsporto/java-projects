@@ -26,4 +26,9 @@ public class LivroEntity {
   @NotNull
   private Integer year;
 
+  public void update(LivroEntity livro) {
+    this.name = livro.name;
+    this.year = livro.year;
+  }
+
 }
