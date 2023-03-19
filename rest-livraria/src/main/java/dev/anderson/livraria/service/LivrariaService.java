@@ -42,15 +42,19 @@ public class LivrariaService {
   }
 
   public LivroEntity updateBook(Long id, LivroEntity livro) {
+    validateUpdateBook(id, livro);
+    LivroEntity livroEntity = livrariaRepository.findById(id).get();
+
+    livroEntity.update(livro);
+    return livrariaRepository.save(livroEntity);
+  }
+
+  private void validateUpdateBook(Long id, LivroEntity livro) {
     if (!livrariaRepository.existsById(id)) {
       throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "Livro não encontrado");
     } else if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
       throw new DuplicatedBookException(HttpStatus.BAD_REQUEST, "Já existe um livro com esse nome e ano");
     }
-    LivroEntity livroEntity = livrariaRepository.findById(id).get();
-
-    livroEntity.update(livro);
-    return livrariaRepository.save(livroEntity);
   }
 
 
