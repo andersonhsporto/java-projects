@@ -47,15 +47,10 @@ public class LivrariaService {
           "Já existe um livro com esse nome e ano"
       );
     }
+      LivroEntity livroEntity = livrariaRepository.getReferenceById(id);
 
-    LivroEntity livroEntity = livrariaRepository
-        .findById(id)
-        .orElseThrow(() ->
-            new BookNotFoundException(HttpStatus.BAD_REQUEST, "Livro não encontrado")
-        );
-
-    livroEntity.update(livro);
-    return livrariaRepository.save(livroEntity);
+      livroEntity.update(livro);
+      return livrariaRepository.save(livroEntity);
   }
 
 }
