@@ -18,9 +18,8 @@ public class LivrariaService {
   public LivroEntity insertBook(LivroEntity livro) {
     if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
       throw new DuplicatedBookException(HttpStatus.BAD_REQUEST, "Livro já cadastrado");
-    } else {
-      return livrariaRepository.save(livro);
     }
+    return livrariaRepository.save(livro);
   }
 
   public List<LivroEntity> getAllBooks() {
@@ -42,20 +41,19 @@ public class LivrariaService {
   }
 
   public LivroEntity updateBook(Long id, LivroEntity livro) {
-    validateUpdateBook(id, livro);
-    LivroEntity livroEntity = livrariaRepository.findById(id).get();
+    if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
+      throw new DuplicatedBookException(HttpStatus.BAD_REQUEST,
+          "Já existe um livro com esse nome e ano");
+    }
+
+    LivroEntity livroEntity = livrariaRepository
+        .findById(id)
+        .orElseThrow(() ->
+            new BookNotFoundException(HttpStatus.BAD_REQUEST, "Livro não encontrado")
+        );
 
     livroEntity.update(livro);
     return livrariaRepository.save(livroEntity);
   }
-
-  private void validateUpdateBook(Long id, LivroEntity livro) {
-    if (!livrariaRepository.existsById(id)) {
-      throw new BookNotFoundException(HttpStatus.BAD_REQUEST, "Livro não encontrado");
-    } else if (livrariaRepository.existsByNameAndYear(livro.getName(), livro.getYear())) {
-      throw new DuplicatedBookException(HttpStatus.BAD_REQUEST, "Já existe um livro com esse nome e ano");
-    }
-  }
-
 
 }
