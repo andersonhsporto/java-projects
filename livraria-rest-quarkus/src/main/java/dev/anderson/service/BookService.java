@@ -10,9 +10,10 @@ import java.util.List;
 
 @ApplicationScoped
 public class BookService {
-    private final BookRepository bookRepository;
 
     @Inject
+    BookRepository bookRepository;
+
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
@@ -24,7 +25,9 @@ public class BookService {
     }
 
     public BookEntity getBook(Long id) {
-        return bookRepository.findByIdOptional(id).orElseThrow(() -> new BookNotFoundException(id));
+        return bookRepository
+                .findByIdOptional(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
     }
 
     public List<BookEntity> getAllBooks() {
@@ -32,16 +35,23 @@ public class BookService {
     }
 
     public BookEntity updateBook(Long id, BookEntity book) {
-        BookEntity bookEntity = bookRepository.findByIdOptional(id).orElseThrow(() -> new BookNotFoundException(id));
+        BookEntity bookEntity = bookRepository
+                .findByIdOptional(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
+
         bookEntity.setUnitsInStock(book.getUnitsInStock());
         bookEntity.setStatus(book.getStatus());
         bookEntity.setPromotionalPrice();
         bookRepository.persist(bookEntity);
+
         return bookEntity;
     }
 
     public void deleteBook(Long id) {
-        BookEntity bookEntity = bookRepository.findByIdOptional(id).orElseThrow(() -> new BookNotFoundException(id));
+        BookEntity bookEntity = bookRepository
+                .findByIdOptional(id)
+                .orElseThrow(() -> new BookNotFoundException(id));
+
         bookRepository.delete(bookEntity);
     }
 

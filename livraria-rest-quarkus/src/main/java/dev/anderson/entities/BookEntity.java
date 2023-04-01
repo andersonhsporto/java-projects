@@ -41,4 +41,5 @@ public class BookEntity {
     public void setStatus(StatusEnum status) {
         this.status = status;
     }
+
 }
