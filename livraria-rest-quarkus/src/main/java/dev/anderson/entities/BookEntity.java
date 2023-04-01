@@ -5,24 +5,6 @@ import dev.anderson.types.StatusEnum;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
-/**
- * Example JPA entity.
- * <p>
- * To use it, get access to a JPA EntityManager via injection.
- * <p>
- * {@code
- *
- * @Inject EntityManager em;
- * <p>
- * public void doSomething() {
- * MyEntity entity1 = new MyEntity();
- * entity1.field = "field-1";
- * em.persist(entity1);
- * <p>
- * List<MyEntity> entities = em.createQuery("from MyEntity", MyEntity.class).getResultList();
- * }
- * }
- */
 @Entity
 public class BookEntity {
     @Id
