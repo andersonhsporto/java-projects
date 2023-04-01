@@ -1,4 +1,4 @@
-package dev.anderson;
+package dev.anderson.types;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
