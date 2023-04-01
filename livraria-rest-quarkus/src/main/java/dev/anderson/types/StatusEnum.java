@@ -30,9 +30,9 @@ public enum StatusEnum {
         }
     };
 
-    private int code;
+    private final int code;
 
-    private StatusEnum(int code) {
+    StatusEnum(int code) {
         this.code = code;
     }
 
