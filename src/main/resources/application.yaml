@@ -1,0 +1,21 @@
+jwt:
+  secret: d17d06be9a367a6ce92d09351e519dc0287f9713d17d06be9a367a6ce92d09351e519dc0287f9713d17d06be9a367a6ce92d09351e519dc0287f9713d17d06be9a367a6ce92d09351e519dc0287f9713
+  expiration: 86400000
+
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+server:
+  servlet:
+    context-path: /api/v1
