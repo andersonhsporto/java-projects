@@ -846,6 +846,8 @@ public class FRMEmployee extends javax.swing.JFrame {
         obj.setId(Integer.parseInt(txtCode.getText()));
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
+        
+        System.out.println(obj);
 
         employeeDAO.updateEmployee(obj);
         Utils.clearScreenText(inputClient);

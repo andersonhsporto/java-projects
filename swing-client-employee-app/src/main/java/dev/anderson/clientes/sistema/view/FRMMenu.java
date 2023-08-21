@@ -17,8 +17,15 @@ public class FRMMenu extends javax.swing.JFrame {
     /**
      * Creates new form FRMMenu
      */
+    
+    public String user;
+    
     public FRMMenu() {
         initComponents();
+    }
+    
+    public void setUser(String user) {
+        this.user = user;
     }
 
     /**
@@ -40,6 +47,8 @@ public class FRMMenu extends javax.swing.JFrame {
 
         }
         ;
+        labelUser = new javax.swing.JLabel();
+        labelUserLogg = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         clientMenu = new javax.swing.JMenu();
         clientControl = new javax.swing.JMenuItem();
@@ -66,12 +75,18 @@ public class FRMMenu extends javax.swing.JFrame {
         panelDesktop.setLayout(panelDesktopLayout);
         panelDesktopLayout.setHorizontalGroup(
             panelDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 854, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelDesktopLayout.setVerticalGroup(
             panelDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
+
+        labelUser.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        labelUser.setText("Usuário Logado: ");
+
+        labelUserLogg.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
+        labelUserLogg.setText("default");
 
         clientMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clientes.png"))); // NOI18N
         clientMenu.setText("Clientes");
@@ -136,10 +151,21 @@ public class FRMMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelDesktop)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelUser)
+                .addGap(18, 18, 18)
+                .addComponent(labelUserLogg)
+                .addContainerGap(677, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelDesktop)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelDesktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelUser)
+                    .addComponent(labelUserLogg)))
         );
 
         pack();
@@ -153,6 +179,7 @@ public class FRMMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setVisible(true);
+        this.labelUserLogg.setText(user);
     }//GEN-LAST:event_formWindowActivated
 
     /**
@@ -197,6 +224,8 @@ public class FRMMenu extends javax.swing.JFrame {
     private javax.swing.JMenu employeMenu;
     private javax.swing.JMenuItem employeeControl;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel labelUser;
+    private javax.swing.JLabel labelUserLogg;
     private javax.swing.JMenu logoutMenu;
     private javax.swing.JDesktopPane panelDesktop;
     private javax.swing.JMenu productMenu;

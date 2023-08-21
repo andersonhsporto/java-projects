@@ -182,6 +182,45 @@ public class EmployeeDAO {
             return null;
         }
     }
+    
+    public EmployeeEntity findByEmail(String email) {
+        try {
+            String sql = "select * from tb_funcionarios where email = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+            EmployeeEntity obj = new EmployeeEntity();
+
+            if (rs.next()) {
+
+                obj.setId(rs.getInt("id"));
+                obj.setName(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelephone(rs.getString("telefone"));
+                obj.setMobile(rs.getString("celular"));
+                obj.setCEP(rs.getString("cep"));
+                obj.setAddress(rs.getString("endereco"));
+                obj.setNumber(rs.getInt("numero"));
+                obj.setAddressComplement(rs.getString("complemento"));
+                obj.setNeighborhood(rs.getString("bairro"));
+                obj.setCity(rs.getString("cidade"));
+                obj.setState(rs.getString("estado"));
+                obj.setPassword(rs.getString("senha"));
+                obj.setPosition(rs.getString("cargo"));
+                obj.setAccessEnum(AccessEnum.fromString(rs.getString("nivel_acesso")));
+            }
+
+            return obj;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Funcionário não encontrado!");
+            return null;
+        }
+    }
 
     public void updateEmployee(EmployeeEntity obj) {
         String saveQuery = "update tb_funcionarios set  nome=?, rg=?, cpf=?, email=?, senha=?,cargo=?, nivel_acesso=?, telefone=?, celular=?, cep=?, "

@@ -173,9 +173,12 @@ public class FRMLogin extends javax.swing.JFrame {
             
             employeeDAO.login(email, password);
             
+            String name = employeeDAO.findByEmail(email).getName();
+            
             FRMMenu menu = new FRMMenu();
             
             menu.setVisible(true);
+            menu.setUser(name);
             this.dispose();
             
         } catch (FailedLoginException e) {
