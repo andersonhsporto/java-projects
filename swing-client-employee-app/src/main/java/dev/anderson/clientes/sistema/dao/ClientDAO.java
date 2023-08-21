@@ -91,10 +91,10 @@ public class ClientDAO {
     }
 
     public void deleteClient(ClientEntity clientEntity) {
-        String saveQuery = "delete from tb_clientes where id = ?";
+        String query = "delete from tb_clientes where id = ?";
 
         try {
-            PreparedStatement stmt = con.prepareStatement(saveQuery);
+            PreparedStatement stmt = con.prepareStatement(query);
 
             stmt.setInt(1, clientEntity.getId());
 
@@ -106,7 +106,6 @@ public class ClientDAO {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
 
         }
-
     }
 
     public List<ClientEntity> findAllClients() {
