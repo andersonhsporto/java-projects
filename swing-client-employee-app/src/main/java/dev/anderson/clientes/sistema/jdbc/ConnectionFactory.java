@@ -31,6 +31,7 @@ public class ConnectionFactory {
             this.makeClientTable();
             this.makeEmployeeTable();
             this.makeVendorTable();
+            this.makeProductTable();
            
             return con;
         } catch (Exception e) {
@@ -112,6 +113,25 @@ public class ConnectionFactory {
                 + "  bairro varchar (100),\n"
                 + "  cidade varchar (100),\n"
                 + "  estado varchar (2))";
+
+        try {
+            assert this.con != null;
+            con.createStatement().executeUpdate(createTableQuery);
+        } catch (SQLException e) {
+            System.out.println("Error");
+        }
+    }
+    
+    public void makeProductTable() {
+         String createTableQuery
+                = "CREATE TABLE IF NOT EXISTS `tb_produtos` ( "
+                + "id int auto_increment primary key,\n"
+                + "  descricao varchar(100),\n"
+                + "  preco decimal (10,2),"
+                + "  qtd_estoque int,\n"
+                + "  for_id int,\n"
+                + "  FOREIGN KEY (for_id) REFERENCES tb_fornecedores(id)\n"
+                + ")";
 
         try {
             assert this.con != null;
