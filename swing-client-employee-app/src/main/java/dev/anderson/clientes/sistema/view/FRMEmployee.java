@@ -831,6 +831,9 @@ public class FRMEmployee extends javax.swing.JFrame {
         obj.setRg(txtRg.getText());
         obj.setCpf(txtCPF.getText());
         obj.setEmail(txtEmail.getText());
+        obj.setPassword(String.valueOf(txtPassword.getPassword()));
+        obj.setPosition(txtPosition.getText());
+        obj.setAccessEnum(AccessEnum.fromString(boxAccess.getSelectedItem().toString()));
         obj.setTelephone(txtTelephone.getText());
         obj.setMobile(txtMobile.getText());
         obj.setCEP(txtCEP.getText());

@@ -196,21 +196,21 @@ public class EmployeeDAO {
             this.hashPassword(stmt, obj.getPassword());
             stmt.setString(6, obj.getPosition());
             stmt.setString(7, obj.getAccessEnum().toString());
-            stmt.setString(5, obj.getTelephone());
-            stmt.setString(6, obj.getMobile());
-            stmt.setString(7, obj.getCEP());
-            stmt.setString(8, obj.getAddress());
-            stmt.setInt(9, obj.getNumber());
-            stmt.setString(10, obj.getAddressComplement());
-            stmt.setString(11, obj.getNeighborhood());
-            stmt.setString(12, obj.getCity());
-            stmt.setString(13, obj.getState());
-            stmt.setInt(14, obj.getId());
+            stmt.setString(8, obj.getTelephone());
+            stmt.setString(9, obj.getMobile());
+            stmt.setString(10, obj.getCEP());
+            stmt.setString(11, obj.getAddress());
+            stmt.setInt(12, obj.getNumber());
+            stmt.setString(13, obj.getAddressComplement());
+            stmt.setString(14, obj.getNeighborhood());
+            stmt.setString(15, obj.getCity());
+            stmt.setString(16, obj.getState());
+            stmt.setInt(17, obj.getId());
 
             stmt.execute();
             stmt.close();
 
-            JOptionPane.showMessageDialog(null, "Cliente Editado Com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Funcionário Editado Com Sucesso!");
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro: " + erro);
 
