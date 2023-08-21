@@ -4,6 +4,10 @@
  */
 package dev.anderson.clientes.sistema.view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author ahigo
@@ -26,29 +30,104 @@ public class FRMMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/background.jpg"));
+        Image image = icon.getImage();
+        panelDesktop = new javax.swing.JDesktopPane() {
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image, 0,0, getWidth(),getHeight(),this);
+            }
+
+        }
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        clientMenu = new javax.swing.JMenu();
+        clientControl = new javax.swing.JMenuItem();
+        employeMenu = new javax.swing.JMenu();
+        employeeControl = new javax.swing.JMenuItem();
+        vendorMenu = new javax.swing.JMenu();
+        vendorControl = new javax.swing.JMenuItem();
+        productMenu = new javax.swing.JMenu();
+        stockControl = new javax.swing.JMenuItem();
+        productsControl = new javax.swing.JMenuItem();
+        salesMenu = new javax.swing.JMenu();
+        sallesControl = new javax.swing.JMenuItem();
+        configurationMenu = new javax.swing.JMenu();
+        logoutMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        jMenu1.setText("Clientes");
-        jMenuBar1.add(jMenu1);
+        javax.swing.GroupLayout panelDesktopLayout = new javax.swing.GroupLayout(panelDesktop);
+        panelDesktop.setLayout(panelDesktopLayout);
+        panelDesktopLayout.setHorizontalGroup(
+            panelDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 854, Short.MAX_VALUE)
+        );
+        panelDesktopLayout.setVerticalGroup(
+            panelDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 416, Short.MAX_VALUE)
+        );
 
-        jMenu2.setText("Funcionários");
-        jMenuBar1.add(jMenu2);
+        clientMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clientes.png"))); // NOI18N
+        clientMenu.setText("Clientes");
 
-        jMenu3.setText("Fornecedores");
-        jMenuBar1.add(jMenu3);
+        clientControl.setText("Controle de Cliente");
+        clientControl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientControlActionPerformed(evt);
+            }
+        });
+        clientMenu.add(clientControl);
 
-        jMenu4.setText("Vendas ");
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(clientMenu);
 
-        jMenu5.setText("Configurações");
-        jMenuBar1.add(jMenu5);
+        employeMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/funcionarios.png"))); // NOI18N
+        employeMenu.setText("Funcionários");
+
+        employeeControl.setText("Controle de Funcionários");
+        employeMenu.add(employeeControl);
+
+        jMenuBar1.add(employeMenu);
+
+        vendorMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fornecedores.png"))); // NOI18N
+        vendorMenu.setText("Fornecedores");
+
+        vendorControl.setText("Controle de Fornecedores");
+        vendorMenu.add(vendorControl);
+
+        jMenuBar1.add(vendorMenu);
+
+        productMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/produtos.png"))); // NOI18N
+        productMenu.setText("Produtos");
+
+        stockControl.setText("Controle de Estoque");
+        productMenu.add(stockControl);
+
+        productsControl.setText("Controle de Produtos");
+        productMenu.add(productsControl);
+
+        jMenuBar1.add(productMenu);
+
+        salesMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vendas.png"))); // NOI18N
+        salesMenu.setText("Vendas");
+
+        sallesControl.setText("Controle de Vendas");
+        salesMenu.add(sallesControl);
+
+        jMenuBar1.add(salesMenu);
+
+        configurationMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/configuracoes.png"))); // NOI18N
+        configurationMenu.setText("Configurações");
+        jMenuBar1.add(configurationMenu);
+
+        logoutMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sair.png"))); // NOI18N
+        logoutMenu.setText("Sair");
+        jMenuBar1.add(logoutMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -56,15 +135,25 @@ public class FRMMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 799, Short.MAX_VALUE)
+            .addComponent(panelDesktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addComponent(panelDesktop)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clientControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientControlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clientControlActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.setVisible(true);
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -77,7 +166,7 @@ public class FRMMenu extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -102,11 +191,20 @@ public class FRMMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem clientControl;
+    private javax.swing.JMenu clientMenu;
+    private javax.swing.JMenu configurationMenu;
+    private javax.swing.JMenu employeMenu;
+    private javax.swing.JMenuItem employeeControl;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu logoutMenu;
+    private javax.swing.JDesktopPane panelDesktop;
+    private javax.swing.JMenu productMenu;
+    private javax.swing.JMenuItem productsControl;
+    private javax.swing.JMenu salesMenu;
+    private javax.swing.JMenuItem sallesControl;
+    private javax.swing.JMenuItem stockControl;
+    private javax.swing.JMenuItem vendorControl;
+    private javax.swing.JMenu vendorMenu;
     // End of variables declaration//GEN-END:variables
 }

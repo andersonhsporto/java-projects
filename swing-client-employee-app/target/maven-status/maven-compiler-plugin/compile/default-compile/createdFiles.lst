@@ -16,6 +16,7 @@ dev\anderson\clientes\sistema\view\FRMEmployee$22.class
 dev\anderson\clientes\sistema\model\enums\AccessEnum.class
 dev\anderson\clientes\sistema\view\FRMClient$20.class
 dev\anderson\clientes\sistema\view\FRMClient$10.class
+dev\anderson\clientes\sistema\view\FRMMenu$4.class
 dev\anderson\clientes\sistema\view\FRMEmployee$14.class
 dev\anderson\clientes\sistema\view\FRMEmployee$6.class
 dev\anderson\clientes\sistema\view\FRMLogin$5.class
@@ -32,6 +33,7 @@ dev\anderson\clientes\sistema\view\FRMClient.class
 dev\anderson\clientes\sistema\view\FRMClient$24.class
 dev\anderson\clientes\sistema\view\FRMEmployee$20.class
 dev\anderson\clientes\sistema\view\FRMEmployee$26.class
+dev\anderson\clientes\sistema\view\FRMMenu$3.class
 dev\anderson\clientes\sistema\view\FRMEmployee$3.class
 dev\anderson\clientes\sistema\dao\EmployeeDAO.class
 dev\anderson\clientes\sistema\view\FRMEmployee$18.class
@@ -62,6 +64,7 @@ dev\anderson\clientes\sistema\view\FRMEmployee$19.class
 dev\anderson\clientes\sistema\view\FRMEmployee$1.class
 dev\anderson\clientes\sistema\view\FRMEmployee$4.class
 dev\anderson\clientes\sistema\view\FRMEmployee$16.class
+dev\anderson\clientes\sistema\view\FRMMenu$2.class
 dev\anderson\clientes\sistema\exceptions\FailedLoginException.class
 dev\anderson\clientes\sistema\view\FRMClient$14.class
 dev\anderson\clientes\sistema\view\FRMClient$7.class
