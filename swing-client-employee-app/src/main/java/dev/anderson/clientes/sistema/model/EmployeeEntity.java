@@ -165,6 +165,11 @@ public class EmployeeEntity {
     public void setAccessEnum(AccessEnum accessEnum) {
         this.accessEnum = accessEnum;
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeEntity{" + "id=" + id + ", name=" + name + ", cpf=" + cpf + ", rg=" + rg + ", email=" + email + ", telephone=" + telephone + ", mobile=" + mobile + ", address=" + address + ", addressComplement=" + addressComplement + ", number=" + number + ", neighborhood=" + neighborhood + ", city=" + city + ", state=" + state + ", CEP=" + CEP + ", password=" + password + ", position=" + position + ", accessEnum=" + accessEnum + '}';
+    }
     
     
     

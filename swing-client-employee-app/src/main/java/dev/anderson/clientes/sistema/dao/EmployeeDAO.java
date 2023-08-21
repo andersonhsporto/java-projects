@@ -6,6 +6,7 @@ package dev.anderson.clientes.sistema.dao;
 
 import com.password4j.Hash;
 import com.password4j.Password;
+import dev.anderson.clientes.sistema.exceptions.FailedLoginException;
 
 import dev.anderson.clientes.sistema.jdbc.ConnectionFactory;
 import dev.anderson.clientes.sistema.model.ClientEntity;
@@ -217,18 +218,6 @@ public class EmployeeDAO {
         }
     }
 
-    private void hashPassword(PreparedStatement stmt, String password) throws SQLException {
-        Hash hash = Password.hash(password).addRandomSalt().withArgon2();
-
-        stmt.setString(5, hash.getResult());
-    }
-
-    private boolean isPasswordValid(String password, EmployeeEntity entity) {
-        return Password
-                .check(password, entity.getPassword())
-                .withArgon2();
-    }
-
     public void deleteEmployee(EmployeeEntity obj) {
         String saveQuery = "delete from tb_funcionarios where id = ?";
 
@@ -246,4 +235,66 @@ public class EmployeeDAO {
         }
     }
 
+    public void login(String email, String password) throws FailedLoginException {
+        try {
+            String query = "select * from tb_funcionarios where email = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs;
+
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                EmployeeEntity obj = this.fromResultSet(rs);
+
+                if (!isPasswordValid(password, obj)) {
+                    throw new RuntimeException("Falha ao validar a senha!");
+                }
+                JOptionPane.showMessageDialog(null, "Bem-vinda(o) ao sistema!");
+            } else {
+                throw new RuntimeException();
+            }
+        } catch (Exception e) {
+            throw new FailedLoginException();
+        }
+    }
+
+    private void hashPassword(PreparedStatement stmt, String password) throws SQLException {
+        Hash hash = Password.hash(password).addRandomSalt().withArgon2();
+
+        stmt.setString(5, hash.getResult());
+    }
+
+    private boolean isPasswordValid(String password, EmployeeEntity entity) {
+        return Password
+                .check(password, entity.getPassword())
+                .withArgon2();
+    }
+
+    private EmployeeEntity fromResultSet(ResultSet rs) {
+        EmployeeEntity obj = new EmployeeEntity();
+
+        try {
+            obj.setId(rs.getInt("id"));
+            obj.setName(rs.getString("nome"));
+            obj.setRg(rs.getString("rg"));
+            obj.setCpf(rs.getString("cpf"));
+            obj.setEmail(rs.getString("email"));
+            obj.setTelephone(rs.getString("telefone"));
+            obj.setMobile(rs.getString("celular"));
+            obj.setCEP(rs.getString("cep"));
+            obj.setAddress(rs.getString("endereco"));
+            obj.setNumber(rs.getInt("numero"));
+            obj.setAddressComplement(rs.getString("complemento"));
+            obj.setNeighborhood(rs.getString("bairro"));
+            obj.setCity(rs.getString("cidade"));
+            obj.setState(rs.getString("estado"));
+            obj.setPassword(rs.getString("senha"));
+            obj.setPosition(rs.getString("cargo"));
+            obj.setAccessEnum(AccessEnum.fromString(rs.getString("nivel_acesso")));
+        } catch (Exception e) {
+            return null;
+        }
+        return obj;
+    }
 }
