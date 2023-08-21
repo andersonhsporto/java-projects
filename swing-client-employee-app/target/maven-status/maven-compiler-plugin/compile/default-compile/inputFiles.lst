@@ -1,8 +1,12 @@
+C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\view\FRMEmployee.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\jdbc\ConnectionFactory.java
+C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\model\enums\AccessEnum.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\service\SearchCEPFactory.java
+C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\model\EmployeeEntity.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\service\CEPModel.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\ClientesSistema.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\view\Utils.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\dao\ClientDAO.java
+C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\dao\EmployeeDAO.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\view\FRMClient.java
 C:\Users\ahigo\Documents\NetBeansProjects\clientes-sistema\src\main\java\dev\anderson\clientes\sistema\model\ClientEntity.java

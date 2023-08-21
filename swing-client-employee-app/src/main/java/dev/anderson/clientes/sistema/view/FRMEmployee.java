@@ -5,7 +5,10 @@
 package dev.anderson.clientes.sistema.view;
 
 import dev.anderson.clientes.sistema.dao.ClientDAO;
+import dev.anderson.clientes.sistema.dao.EmployeeDAO;
 import dev.anderson.clientes.sistema.model.ClientEntity;
+import dev.anderson.clientes.sistema.model.EmployeeEntity;
+import dev.anderson.clientes.sistema.model.enums.AccessEnum;
 import dev.anderson.clientes.sistema.service.CEPModel;
 import dev.anderson.clientes.sistema.service.SearchCEPFactory;
 import java.awt.event.KeyEvent;
@@ -17,22 +20,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ahigo
  */
-public class FRMClient extends javax.swing.JFrame {
+public class FRMEmployee extends javax.swing.JFrame {
 
     public void list() {
-        ClientDAO clientDAO = new ClientDAO();
-        List<ClientEntity> list = clientDAO.findAllClients();
-        DefaultTableModel data = (DefaultTableModel) tableClient.getModel();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        List<EmployeeEntity> list = employeeDAO.findAllEmployee();
+        DefaultTableModel data = (DefaultTableModel) tableEmployee.getModel();
 
         data.setNumRows(0);
 
-        for (ClientEntity c : list) {
+        for (EmployeeEntity c : list) {
             data.addRow(new Object[]{
                 c.getId(),
                 c.getName(),
                 c.getRg(),
                 c.getCpf(),
                 c.getEmail(),
+                c.getPassword(),
+                c.getPosition(),
+                c.getAccessEnum().toString(),
                 c.getTelephone(),
                 c.getMobile(),
                 c.getCEP(),
@@ -48,19 +54,22 @@ public class FRMClient extends javax.swing.JFrame {
     }
 
     public void listByNameLike(String name) {
-        ClientDAO clientDAO = new ClientDAO();
-        List<ClientEntity> list = clientDAO.findAllClientsByName(name);
-        DefaultTableModel data = (DefaultTableModel) tableClient.getModel();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        List<EmployeeEntity> list = employeeDAO.findAllEmployeeByName(name);
+        DefaultTableModel data = (DefaultTableModel) tableEmployee.getModel();
 
         data.setNumRows(0);
 
-        for (ClientEntity c : list) {
+        for (EmployeeEntity c : list) {
             data.addRow(new Object[]{
                 c.getId(),
                 c.getName(),
                 c.getRg(),
                 c.getCpf(),
                 c.getEmail(),
+                c.getPassword(),
+                c.getPosition(),
+                c.getAccessEnum().toString(),
                 c.getTelephone(),
                 c.getMobile(),
                 c.getCEP(),
@@ -75,8 +84,8 @@ public class FRMClient extends javax.swing.JFrame {
     }
 
     public void findByName(String name) {
-        ClientDAO clientDAO = new ClientDAO();
-        ClientEntity obj = clientDAO.findByName(name);
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+        EmployeeEntity obj = employeeDAO.findByName(name);
         
         if (obj.getName() != null) {
 
@@ -89,14 +98,17 @@ public class FRMClient extends javax.swing.JFrame {
             txtTelephone.setText(obj.getTelephone());
             txtMobile.setText(obj.getMobile());
             txtCEP.setText(obj.getCEP());
-            txtAddress.setText(obj.getAddress());
+            txtAddress1.setText(obj.getAddress());
             txtNumber.setText(String.valueOf(obj.getNumber()));
             txtAddressComplement.setText(obj.getAddressComplement());
             txtNeighborhood.setText(obj.getNeighborhood());
             txtCity.setText(obj.getCity());
             boxState.setSelectedItem(obj.getState());
+            txtPassword.setText(obj.getPassword());
+            txtPosition.setText(obj.getPosition());
+            boxState.setSelectedItem(obj.getAccessEnum().toString().toUpperCase());
         } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            JOptionPane.showMessageDialog(null, "Funcionário não encontrado!");
         }
 
     }
@@ -104,7 +116,7 @@ public class FRMClient extends javax.swing.JFrame {
     /**
      * Creates new form FRMClient
      */
-    public FRMClient() {
+    public FRMEmployee() {
         initComponents();
     }
 
@@ -133,7 +145,6 @@ public class FRMClient extends javax.swing.JFrame {
         txtTelephone = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JFormattedTextField();
-        txtAddress = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtNumber = new javax.swing.JTextField();
@@ -150,12 +161,19 @@ public class FRMClient extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         txtNeighborhood = new javax.swing.JTextField();
         btnSearchByName = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        txtAddress1 = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        boxAccess = new javax.swing.JComboBox<>();
+        txtPosition = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableClient = new javax.swing.JTable();
+        tableEmployee = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -174,7 +192,7 @@ public class FRMClient extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cadastro de Clientes");
+        jLabel1.setText("Cadastro de Funcionários");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -276,13 +294,6 @@ public class FRMClient extends javax.swing.JFrame {
             }
         });
 
-        txtAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel8.setText("Endereço:");
 
@@ -368,6 +379,43 @@ public class FRMClient extends javax.swing.JFrame {
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel18.setText("Senha Padrão:");
+
+        txtAddress1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtAddress1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddress1ActionPerformed(evt);
+            }
+        });
+
+        txtPassword.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel19.setText("Cargo:");
+
+        jLabel20.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel20.setText("Acesso:");
+
+        boxAccess.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USUARIO", "ADMIN" }));
+        boxAccess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxAccessActionPerformed(evt);
+            }
+        });
+
+        txtPosition.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPositionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout inputClientLayout = new javax.swing.GroupLayout(inputClient);
         inputClient.setLayout(inputClientLayout);
         inputClientLayout.setHorizontalGroup(
@@ -377,34 +425,27 @@ public class FRMClient extends javax.swing.JFrame {
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(inputClientLayout.createSequentialGroup()
                         .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(28, 28, 28)
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(inputClientLayout.createSequentialGroup()
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(inputClientLayout.createSequentialGroup()
                                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel13))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(28, 28, 28)
                                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(inputClientLayout.createSequentialGroup()
-                                        .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6))
-                                    .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                                        .addComponent(txtCity))))
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(inputClientLayout.createSequentialGroup()
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(inputClientLayout.createSequentialGroup()
-                                .addGap(352, 352, 352)
+                                .addComponent(jLabel3)
+                                .addGap(37, 37, 37)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSearchByName)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputClientLayout.createSequentialGroup()
+                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inputClientLayout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addComponent(txtAddress1)
+                                .addGap(8, 8, 8)
                                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10))
@@ -412,32 +453,57 @@ public class FRMClient extends javax.swing.JFrame {
                                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNumber)
                                     .addComponent(boxState, 0, 91, Short.MAX_VALUE)))
-                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, inputClientLayout.createSequentialGroup()
+                                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(inputClientLayout.createSequentialGroup()
+                                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel13))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(inputClientLayout.createSequentialGroup()
+                                                .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel6))
+                                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 218, Short.MAX_VALUE))
+                            .addGroup(inputClientLayout.createSequentialGroup()
+                                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(inputClientLayout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(inputClientLayout.createSequentialGroup()
+                                        .addGap(298, 298, 298)
+                                        .addComponent(jLabel19)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPosition)))
                         .addGap(33, 33, 33)
                         .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel12)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(inputClientLayout.createSequentialGroup()
-                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(inputClientLayout.createSequentialGroup()
-                                .addComponent(txtAddressComplement, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel20))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(inputClientLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(470, 470, 470)
-                        .addComponent(btnSearchByName)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxAccess, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(inputClientLayout.createSequentialGroup()
+                        .addComponent(txtAddressComplement, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47))
         );
         inputClientLayout.setVerticalGroup(
             inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,12 +530,12 @@ public class FRMClient extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11)
                         .addComponent(txtAddressComplement, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -484,7 +550,16 @@ public class FRMClient extends javax.swing.JFrame {
                     .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(99, 99, 99))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel18)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel20)
+                        .addComponent(boxAccess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPosition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62))
         );
 
         jTabbedPane1.addTab("Dados Pessoais", inputClient);
@@ -503,20 +578,20 @@ public class FRMClient extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
 
-        tableClient.setModel(new javax.swing.table.DefaultTableModel(
+        tableEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "id", "nome", "rg", "cpf", "email", "telefone", "celular", "cep", "endereco", "numero", "complemento", "bairro", "cidade", "uf"
+                "id", "nome", "rg", "cpf", "email", "senha", "cargo", "nível acesso", "telefone", "celular", "cep", "endereco", "numero", "complemento", "bairro", "cidade", "uf"
             }
         ));
-        tableClient.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableClientMouseClicked(evt);
+                tableEmployeeMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tableClient);
+        jScrollPane1.setViewportView(tableEmployee);
 
         btnSearch.setText("Pesquisar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -563,7 +638,7 @@ public class FRMClient extends javax.swing.JFrame {
                         .addGap(0, 53, Short.MAX_VALUE))))
         );
 
-        jTabbedPane1.addTab("Consultar Clientes", jPanel3);
+        jTabbedPane1.addTab("Consultar Funcionários", jPanel3);
 
         btnNew.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnNew.setText("NOVO");
@@ -656,10 +731,6 @@ public class FRMClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumberActionPerformed
 
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
-
     private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
         
     }//GEN-LAST:event_txtCEPActionPerformed
@@ -695,25 +766,28 @@ public class FRMClient extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-        ClientEntity obj = new ClientEntity();
+        EmployeeEntity obj = new EmployeeEntity();
 
         obj.setName(txtName.getText());
         obj.setRg(txtRg.getText());
         obj.setCpf(txtCPF.getText());
         obj.setEmail(txtEmail.getText());
+        obj.setPassword(String.valueOf(txtPassword.getPassword()));
+        obj.setPosition(txtPosition.getText());
+        obj.setAccessEnum(AccessEnum.fromString(boxAccess.getSelectedItem().toString()));
         obj.setTelephone(txtTelephone.getText());
         obj.setMobile(txtMobile.getText());
         obj.setCEP(txtCEP.getText());
-        obj.setAddress(txtAddress.getText());
+        obj.setAddress(txtAddress1.getText());
         obj.setNumber(Integer.parseInt(txtNumber.getText()));
         obj.setAddressComplement(txtAddressComplement.getText());
         obj.setNeighborhood(txtNeighborhood.getText());
         obj.setCity(txtCity.getText());
         obj.setState(boxState.getSelectedItem().toString());
 
-        ClientDAO clientDAO = new ClientDAO();
+        EmployeeDAO employee = new EmployeeDAO();
 
-        clientDAO.saveClient(obj);
+        employee.saveEmployee(obj);
 
         Utils.clearScreenText(inputClient);
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -726,29 +800,32 @@ public class FRMClient extends javax.swing.JFrame {
         this.list();
     }//GEN-LAST:event_formWindowActivated
 
-    private void tableClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientMouseClicked
+    private void tableEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableEmployeeMouseClicked
         // clique tabela
         jTabbedPane1.setSelectedIndex(0);
 
-        txtCode.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 0).toString());
-        txtName.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 1).toString());
-        txtRg.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 2).toString());
-        txtCPF.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 3).toString());
-        txtEmail.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
-        txtTelephone.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 5).toString());
-        txtMobile.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 6).toString());
-        txtCEP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 7).toString());
-        txtAddress.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 8).toString());
-        txtNumber.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 9).toString());
-        txtAddressComplement.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 10).toString());
-        txtNeighborhood.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 11).toString());
-        txtCity.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 12).toString());
-        boxState.setSelectedItem(tableClient.getValueAt(tableClient.getSelectedRow(), 13).toString());
-    }//GEN-LAST:event_tableClientMouseClicked
+        txtCode.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 0).toString());
+        txtName.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 1).toString());
+        txtRg.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 2).toString());
+        txtCPF.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 3).toString());
+        txtEmail.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 4).toString());
+        txtPassword.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 5).toString());
+        txtPosition.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 6).toString());
+        boxAccess.setSelectedItem(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 7).toString());
+        txtTelephone.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 8).toString());
+        txtMobile.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 9).toString());
+        txtCEP.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 10).toString());
+        txtAddress1.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 11).toString());
+        txtNumber.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 12).toString());
+        txtAddressComplement.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 13).toString());
+        txtNeighborhood.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 14).toString());
+        txtCity.setText(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 15).toString());
+        boxState.setSelectedItem(tableEmployee.getValueAt(tableEmployee.getSelectedRow(), 16).toString());
+    }//GEN-LAST:event_tableEmployeeMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        ClientEntity obj = new ClientEntity();
+        EmployeeEntity obj = new EmployeeEntity();
 
         obj.setName(txtName.getText());
         obj.setRg(txtRg.getText());
@@ -757,7 +834,7 @@ public class FRMClient extends javax.swing.JFrame {
         obj.setTelephone(txtTelephone.getText());
         obj.setMobile(txtMobile.getText());
         obj.setCEP(txtCEP.getText());
-        obj.setAddress(txtAddress.getText());
+        obj.setAddress(txtAddress1.getText());
         obj.setNumber(Integer.parseInt(txtNumber.getText()));
         obj.setAddressComplement(txtAddressComplement.getText());
         obj.setNeighborhood(txtNeighborhood.getText());
@@ -765,26 +842,26 @@ public class FRMClient extends javax.swing.JFrame {
         obj.setState(boxState.getSelectedItem().toString());
         obj.setId(Integer.parseInt(txtCode.getText()));
 
-        ClientDAO clientDAO = new ClientDAO();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
 
-        clientDAO.updateClient(obj);
+        employeeDAO.updateEmployee(obj);
         Utils.clearScreenText(inputClient);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        ClientEntity obj = new ClientEntity();
+        EmployeeEntity obj = new EmployeeEntity();
 
         obj.setId(Integer.parseInt(txtCode.getText()));
 
-        ClientDAO clientDAO = new ClientDAO();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
 
-        clientDAO.deleteClient(obj);
+        employeeDAO.deleteEmployee(obj);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String txtSearch = "%" + this.txtSearch.getText() + "%";
+        String txtSearch = this.txtSearch.getText();
 
         this.listByNameLike(txtSearch);
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -802,13 +879,29 @@ public class FRMClient extends javax.swing.JFrame {
             CEPModel cepModel = SearchCEPFactory.factory(cep.replaceAll("\\s+",""));
             
             if (cepModel != null) {
-                txtAddress.setText(cepModel.getAddress());
+                txtAddress1.setText(cepModel.getAddress());
                 txtNeighborhood.setText(cepModel.getNeighborhood());
                 txtCity.setText(cepModel.getCity());
                 boxState.setSelectedItem(cepModel.getUf());
             }
         }
     }//GEN-LAST:event_txtCEPKeyPressed
+
+    private void txtAddress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddress1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddress1ActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
+
+    private void boxAccessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAccessActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxAccessActionPerformed
+
+    private void txtPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPositionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPositionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -827,25 +920,27 @@ public class FRMClient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRMClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRMClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRMClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRMClient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRMClient().setVisible(true);
+                new FRMEmployee().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxAccess;
     private javax.swing.JComboBox<String> boxState;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
@@ -863,7 +958,10 @@ public class FRMClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -875,8 +973,8 @@ public class FRMClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tableClient;
-    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTable tableEmployee;
+    private javax.swing.JTextField txtAddress1;
     private javax.swing.JTextField txtAddressComplement;
     private javax.swing.JFormattedTextField txtCEP;
     private javax.swing.JFormattedTextField txtCPF;
@@ -887,6 +985,8 @@ public class FRMClient extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNeighborhood;
     private javax.swing.JTextField txtNumber;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPosition;
     private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JFormattedTextField txtTelephone;
