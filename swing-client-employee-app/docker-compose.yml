@@ -1,0 +1,14 @@
+version: "3"
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db-swing
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    container_name: database
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
