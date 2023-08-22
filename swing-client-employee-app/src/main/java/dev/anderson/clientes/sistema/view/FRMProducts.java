@@ -5,7 +5,12 @@
 package dev.anderson.clientes.sistema.view;
 
 import dev.anderson.clientes.sistema.dao.ClientDAO;
+import dev.anderson.clientes.sistema.dao.ProductDAO;
+import dev.anderson.clientes.sistema.dao.VendorDAO;
 import dev.anderson.clientes.sistema.model.ClientEntity;
+import dev.anderson.clientes.sistema.model.ProductEntity;
+import dev.anderson.clientes.sistema.model.VendorEntity;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,83 +22,58 @@ import javax.swing.table.DefaultTableModel;
 public class FRMProducts extends javax.swing.JFrame {
 
     public void list() {
-        ClientDAO clientDAO = new ClientDAO();
-        List<ClientEntity> list = clientDAO.findAllClients();
+        ProductDAO productDAO = new ProductDAO();
+        List<ProductEntity> list = productDAO.findAll();
         DefaultTableModel data = (DefaultTableModel) tableClient.getModel();
 
         data.setNumRows(0);
 
-        for (ClientEntity c : list) {
+        for (ProductEntity c : list) {
             data.addRow(new Object[]{
                 c.getId(),
-                c.getName(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelephone(),
-                c.getMobile(),
-                c.getCEP(),
-                c.getAddress(),
-                c.getNumber(),
-                c.getAddressComplement(),
-                c.getNeighborhood(),
-                c.getCity(),
-                c.getState()
+                c.getDescription(),
+                c.getPrice(),
+                c.getStockQuantity(),
+                c.getVendor().getName(),
+                c.getVendor().getId()
             });
         }
 
     }
 
     public void listByNameLike(String name) {
-        ClientDAO clientDAO = new ClientDAO();
-        List<ClientEntity> list = clientDAO.findAllClientsByName(name);
+        ProductDAO productDAO = new ProductDAO();
+        List<ProductEntity> list = productDAO.findAll();
         DefaultTableModel data = (DefaultTableModel) tableClient.getModel();
 
         data.setNumRows(0);
 
-        for (ClientEntity c : list) {
+        for (ProductEntity c : list) {
             data.addRow(new Object[]{
                 c.getId(),
-                c.getName(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getTelephone(),
-                c.getMobile(),
-                c.getCEP(),
-                c.getAddress(),
-                c.getNumber(),
-                c.getAddressComplement(),
-                c.getNeighborhood(),
-                c.getCity(),
-                c.getState()
+                c.getDescription(),
+                c.getPrice(),
+                c.getStockQuantity(),
+                c.getVendor().getName(),
+                c.getVendor().getId()
             });
         }
     }
 
     public void findByName(String name) {
-        ClientDAO clientDAO = new ClientDAO();
-        ClientEntity obj = clientDAO.findByName(name);
-        
-        if (obj.getName() != null) {
+        ProductDAO productDAO = new ProductDAO();
+        ProductEntity obj = productDAO.findByName(name);
+
+        if (obj.getDescription() != null) {
 
             //Exibi os dados do obj nos campos de texto
             txtCode.setText(String.valueOf(obj.getId()));
-            txtDescription.setText(obj.getName());
-            txtRg.setText(obj.getRg());
-            txtCPF.setText(obj.getCpf());
-            txtPrice.setText(obj.getEmail());
-            txtTelephone.setText(obj.getTelephone());
-            txtMobile.setText(obj.getMobile());
-            txtCEP.setText(obj.getCEP());
-            txtQuantity.setText(obj.getAddress());
-            txtNumber.setText(String.valueOf(obj.getNumber()));
-            txtAddressComplement.setText(obj.getAddressComplement());
-            txtNeighborhood.setText(obj.getNeighborhood());
-            txtCity.setText(obj.getCity());
-            boxVendor.setSelectedItem(obj.getState());
+            txtDescription.setText(obj.getDescription());
+            txtPrice.setText(obj.getPrice().toString());
+            txtQuantity.setText(Integer.toString(obj.getStockQuantity()));
+            boxVendor.setSelectedItem(obj.getVendor());
         } else {
-            JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            JOptionPane.showMessageDialog(null, "Produto não encontrado!");
         }
 
     }
@@ -126,9 +106,9 @@ public class FRMProducts extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        boxVendor = new javax.swing.JComboBox<>();
+        boxVendor = new javax.swing.JComboBox();
+        btnSearchByName = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -203,7 +183,7 @@ public class FRMProducts extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel4.setText("Preço");
+        jLabel4.setText("Preço:");
 
         txtQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
@@ -215,16 +195,28 @@ public class FRMProducts extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel8.setText("Quantidade em Estoque:");
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel9.setText("Número:");
-
         jLabel10.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel10.setText("Fornecedor:");
 
-        boxVendor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP", "RJ", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RN", "RS", "RO", "RR", "SC", "SE", "TO" }));
+        boxVendor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                boxVendorAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         boxVendor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxVendorActionPerformed(evt);
+            }
+        });
+
+        btnSearchByName.setText("Pesquisar");
+        btnSearchByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchByNameActionPerformed(evt);
             }
         });
 
@@ -235,35 +227,28 @@ public class FRMProducts extends javax.swing.JFrame {
             .addGroup(inputClientLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(inputClientLayout.createSequentialGroup()
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(inputClientLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(boxVendor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inputClientLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxVendor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(inputClientLayout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtQuantity))
+                        .addGroup(inputClientLayout.createSequentialGroup()
                             .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(inputClientLayout.createSequentialGroup()
-                                    .addGap(352, 352, 352)
-                                    .addComponent(jLabel9)
-                                    .addGap(97, 97, 97))
-                                .addComponent(txtDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(694, 694, 694))
-                    .addGroup(inputClientLayout.createSequentialGroup()
-                        .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(inputClientLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQuantity))
-                            .addGroup(inputClientLayout.createSequentialGroup()
-                                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(28, 28, 28)
-                                .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel3))
-                        .addGap(46, 46, 46))))
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4))
+                            .addGap(28, 28, 28)
+                            .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSearchByName)
+                .addGap(608, 608, 608))
         );
         inputClientLayout.setVerticalGroup(
             inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +260,8 @@ public class FRMProducts extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchByName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,8 +269,7 @@ public class FRMProducts extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(inputClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -448,27 +433,22 @@ public class FRMProducts extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-        ClientEntity obj = new ClientEntity();
+        try {
+            VendorEntity vendorEntity = (VendorEntity) boxVendor.getSelectedItem();
+            ProductEntity obj = new ProductEntity();
+            ProductDAO productDAO = new ProductDAO();
 
-        obj.setName(txtDescription.getText());
-        obj.setRg(txtRg.getText());
-        obj.setCpf(txtCPF.getText());
-        obj.setEmail(txtPrice.getText());
-        obj.setTelephone(txtTelephone.getText());
-        obj.setMobile(txtMobile.getText());
-        obj.setCEP(txtCEP.getText());
-        obj.setAddress(txtQuantity.getText());
-        obj.setNumber(Integer.parseInt(txtNumber.getText()));
-        obj.setAddressComplement(txtAddressComplement.getText());
-        obj.setNeighborhood(txtNeighborhood.getText());
-        obj.setCity(txtCity.getText());
-        obj.setState(boxVendor.getSelectedItem().toString());
+            obj.setDescription(txtDescription.getText());
+            obj.setPrice(new BigDecimal(txtPrice.getText()));
+            obj.setStockQuantity(Integer.parseInt(txtQuantity.getText()));
+            obj.setVendor(vendorEntity);
 
-        ClientDAO clientDAO = new ClientDAO();
+            productDAO.saveProduct(obj);
 
-        clientDAO.saveClient(obj);
-
-        Utils.clearScreenText(inputClient);
+            Utils.clearScreenText(inputClient);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Falha Ao Cadastrar O Produto!");
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -481,54 +461,42 @@ public class FRMProducts extends javax.swing.JFrame {
 
         txtCode.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 0).toString());
         txtDescription.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 1).toString());
-        txtRg.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 2).toString());
-        txtCPF.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 3).toString());
-        txtPrice.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
-        txtTelephone.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 5).toString());
-        txtMobile.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 6).toString());
-        txtCEP.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 7).toString());
-        txtQuantity.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 8).toString());
-        txtNumber.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 9).toString());
-        txtAddressComplement.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 10).toString());
-        txtNeighborhood.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 11).toString());
-        txtCity.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 12).toString());
-        boxVendor.setSelectedItem(tableClient.getValueAt(tableClient.getSelectedRow(), 13).toString());
+        txtPrice.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 2).toString());
+        txtQuantity.setText(tableClient.getValueAt(tableClient.getSelectedRow(), 3).toString());
+        boxVendor.setSelectedItem(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
+
+        VendorEntity v;
+        VendorDAO vendorDAO = new VendorDAO();
+
+        v = vendorDAO.findByName(tableClient.getValueAt(tableClient.getSelectedRow(), 4).toString());
+
+        boxVendor.removeAllItems();
+
+        boxVendor.getModel().setSelectedItem(v);
+
     }//GEN-LAST:event_tableClientMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        ClientEntity obj = new ClientEntity();
+        ProductEntity obj = new ProductEntity();
 
-        obj.setName(txtDescription.getText());
-        obj.setRg(txtRg.getText());
-        obj.setCpf(txtCPF.getText());
-        obj.setEmail(txtPrice.getText());
-        obj.setTelephone(txtTelephone.getText());
-        obj.setMobile(txtMobile.getText());
-        obj.setCEP(txtCEP.getText());
-        obj.setAddress(txtQuantity.getText());
-        obj.setNumber(Integer.parseInt(txtNumber.getText()));
-        obj.setAddressComplement(txtAddressComplement.getText());
-        obj.setNeighborhood(txtNeighborhood.getText());
-        obj.setCity(txtCity.getText());
-        obj.setState(boxVendor.getSelectedItem().toString());
         obj.setId(Integer.parseInt(txtCode.getText()));
 
-        ClientDAO clientDAO = new ClientDAO();
+        ProductDAO productDAO = new ProductDAO();
 
-        clientDAO.updateClient(obj);
+        productDAO.update(obj);
         Utils.clearScreenText(inputClient);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        ClientEntity obj = new ClientEntity();
+        ProductEntity obj = new ProductEntity();
 
         obj.setId(Integer.parseInt(txtCode.getText()));
 
-        ClientDAO clientDAO = new ClientDAO();
+        ProductDAO productDAO = new ProductDAO();
 
-        clientDAO.deleteClient(obj);
+        productDAO.delete(obj);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -537,6 +505,21 @@ public class FRMProducts extends javax.swing.JFrame {
 
         this.listByNameLike(txtSearch);
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void boxVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxVendorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxVendorActionPerformed
+
+    private void boxVendorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_boxVendorAncestorAdded
+        // TODO add your handling code here:
+        VendorDAO dao = new VendorDAO();
+        List<VendorEntity> list = dao.findAllVendor();
+
+        boxVendor.removeAll();
+        for (VendorEntity v : list) {
+            boxVendor.addItem(v);
+        }
+    }//GEN-LAST:event_boxVendorAncestorAdded
 
     private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
         // TODO add your handling code here:
@@ -554,9 +537,11 @@ public class FRMProducts extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodeActionPerformed
 
-    private void boxVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxVendorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxVendorActionPerformed
+    private void btnSearchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByNameActionPerformed
+        if (txtDescription.getText() != null) {
+            this.findByName(txtDescription.getText());
+        }
+    }//GEN-LAST:event_btnSearchByNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -595,11 +580,12 @@ public class FRMProducts extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxVendor;
+    private javax.swing.JComboBox boxVendor;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchByName;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JPanel inputClient;
     private javax.swing.JLabel jLabel1;
@@ -610,7 +596,6 @@ public class FRMProducts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

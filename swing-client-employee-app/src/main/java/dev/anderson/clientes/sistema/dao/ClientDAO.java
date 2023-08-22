@@ -24,7 +24,6 @@ public class ClientDAO {
 
     public ClientDAO() {
         this.con = new ConnectionFactory().getConnection();
-
     }
 
     public void saveClient(ClientEntity client) {

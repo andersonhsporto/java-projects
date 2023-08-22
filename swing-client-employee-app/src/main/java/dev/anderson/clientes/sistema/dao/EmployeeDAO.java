@@ -7,9 +7,7 @@ package dev.anderson.clientes.sistema.dao;
 import com.password4j.Hash;
 import com.password4j.Password;
 import dev.anderson.clientes.sistema.exceptions.FailedLoginException;
-
 import dev.anderson.clientes.sistema.jdbc.ConnectionFactory;
-import dev.anderson.clientes.sistema.model.ClientEntity;
 import dev.anderson.clientes.sistema.model.EmployeeEntity;
 import dev.anderson.clientes.sistema.model.enums.AccessEnum;
 import java.sql.Connection;

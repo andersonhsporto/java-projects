@@ -5,7 +5,6 @@
 package dev.anderson.clientes.sistema.dao;
 
 import dev.anderson.clientes.sistema.jdbc.ConnectionFactory;
-import dev.anderson.clientes.sistema.model.ClientEntity;
 import dev.anderson.clientes.sistema.model.VendorEntity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

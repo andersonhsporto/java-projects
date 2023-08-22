@@ -127,7 +127,9 @@ public class VendorEntity {
     public void setCEP(String CEP) {
         this.CEP = CEP;
     }
-    
-    
 
+    @Override
+    public String toString() {
+        return "[ " + name.toUpperCase() + ", " + city.toUpperCase() + ", " + state + " ]";
+    }
 }
