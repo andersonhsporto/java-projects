@@ -21,7 +21,8 @@ This repository contains a collection of Java exercises, examples, and projects 
 - **rest-livraria**: REST API for managing a bookstore.
 - **rest-open-api-generator**: Example project using OpenAPI Generator for REST APIs.
 - **sacola-API**: API project for managing shopping bags.
-- **sw-planet-api**: API project for managing Star Wars planets.
+- **sw-planet-api**: API project using TDD (Test-Driven Development) for managing planets.
+- **Taygeta-api**: Mars rover challenge API project.
 - **theme-park-api-jenkins**: API project for managing theme parks with Jenkins integration.
 - **upload-image-api**: API project for uploading and managing images.
 - **user-api**: API project for managing user data.
