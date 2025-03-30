@@ -1,0 +1,27 @@
+type Query {
+    clientById(id: ID!): Client
+    clients: [Client!]
+}
+
+type Client {
+    id: ID!
+    name: String!
+    email: String!
+    phone: String
+    products: [Product!]
+}
+
+type Product {
+    name: String!
+}
+
+input ClientInputDTO {
+    name: String!
+    email: String!
+    phone: String
+}
+
+type Mutation {
+    createClient(client: ClientInputDTO!): Client
+}
+

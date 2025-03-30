@@ -1,0 +1,2 @@
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                 NAMES
+1e4a33d25cdb   mysql     "docker-entrypoint.s…"   11 minutes ago   Up 59 seconds   3306/tcp, 33060/tcp   user-database-spring
