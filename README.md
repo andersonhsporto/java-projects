@@ -25,6 +25,7 @@ This repository contains a collection of Java exercises, examples, and projects 
 - **sw-planet-api**: API project using TDD (Test-Driven Development) for managing planets.
 - **swing-client-employee-app** : Swing application for managing employee data.
 - **Taygeta-api**: Mars rover challenge API project.
+- **Taygeta-cli**: Command-line interface for the Mars rover challenge with raw Java.
 - **theme-park-api-jenkins**: API project for managing theme parks with Jenkins integration.
 - **upload-image-api**: API project for uploading and managing images.
 - **URl-Shortener**: URL shortener API project using Spring Boot framework.
