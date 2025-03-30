@@ -15,6 +15,7 @@ This repository contains a collection of Java exercises, examples, and projects 
 - **java-Exercicios**: Additional Java exercises.
 - **JpaRelationships**: Examples of JPA relationships (One-to-One, One-to-Many, Many-to-Many).
 - **JwtExample**: Example project demonstrating JWT (JSON Web Token) authentication.
+- **livraria-rest-quarkus**: REST API for managing a bookstore using Quarkus framework.
 - **MarketAPIQL**: API project for managing a market system with GraphQL.
 - **people-api**: API project for managing people data.
 - **philosophers-dining-java**: Solution for the "Dining Philosophers" concurrency problem.
