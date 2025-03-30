@@ -1,0 +1,11 @@
+services:
+  app:
+    image: 'wordle-api-v1:latest'
+    container_name: wordle-api
+    build:
+      context: .
+    ports:
+      - '8080:8080'
+
+volumes:
+  volumes:
