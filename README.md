@@ -27,6 +27,7 @@ This repository contains a collection of Java exercises, examples, and projects 
 - **Taygeta-api**: Mars rover challenge API project.
 - **theme-park-api-jenkins**: API project for managing theme parks with Jenkins integration.
 - **upload-image-api**: API project for uploading and managing images.
+- **URl-Shortener**: URL shortener API project using Spring Boot framework.
 - **user-api**: API project for managing user data.
 - **WordleClone-api**: API implementation of a Wordle clone game.
 
